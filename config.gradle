@@ -1,0 +1,93 @@
+ext {
+    //    Basic Android studio
+    androidGradlePlugin = 'com.android.tools.build:gradle:2.3.3'
+    buildToolsVer = '26.0.2'
+    minVer = 16
+    targetVer = 26
+
+
+    //Http Engine
+    retrofitVersion = '2.3.0'
+
+    //rx
+    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '2.1.7'
+    rxLifeCycleVersion = '2.2.1'
+    //Image
+    glideVersion = '4.3.1'
+    circleImageVersion = '1.3.0'
+
+
+    butterKnifeVersion = '8.8.1'
+    rxBindVersion = '2.0.0'
+
+    //Test
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    robolectricVersion = '3.0'
+
+//---------------------------------------------support----------------------------------------------
+    supportPackage = 'com.android.support'
+    supportVersion = '26.1.0'    //   android support
+    sup = [
+            design      : buildDepend(supportPackage, 'design', supportVersion),
+            recyclerView: buildDepend(supportPackage, 'recyclerview-v7', supportVersion),
+            cardView    : buildDepend(supportPackage, 'cardview-v7', supportVersion),
+            appCompat   : buildDepend(supportPackage, 'appcompat-v7', supportVersion)
+    ]
+//--------------------------------------------Http Engine-------------------------------------------
+    retrofitPackage = 'com.squareup.retrofit2'
+    retrofit = [
+            core         : buildDepend(retrofitPackage, 'retrofit', retrofitVersion),
+            gson         : buildDepend(retrofitPackage, 'converter-gson', retrofitVersion),
+            rxAdapterJava: buildDepend(retrofitPackage, 'adapter-rxjava2', retrofitVersion)
+    ]
+
+//---------------------------------------------Rx --------------------------------------------------
+    reactivePackage = 'io.reactivex.rxjava2'
+
+    rx = [
+            android     : buildDepend(reactivePackage, 'rxandroid', rxAndroidVersion),
+            java        : buildDepend(reactivePackage, 'rxjava', rxJavaVersion),
+            life        : "com.trello.rxlifecycle2:rxlifecycle:$rxLifeCycleVersion",
+            lifeAndroid : "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifeCycleVersion",
+            lifeCmp     : "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifeCycleVersion",
+
+
+            binding     : "com.jakewharton.rxbinding2:rxbinding:$rxBindVersion",
+            bindSup     : "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindVersion",
+            bindCompat  : "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindVersion",
+            bindDesign  : "com.jakewharton.rxbinding2:rxbinding-design:$rxBindVersion",
+            bindRecycler: "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxBindVersion",
+            bindLean    : "com.jakewharton.rxbinding2:rxbinding-leanback-v17:$rxBindVersion"
+
+    ]
+
+//---------------------------------------------IOC--------------------------------------------------
+
+    knife = "com.jakewharton:butterknife:$butterKnifeVersion"
+    knifeAPT = "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+//--------------------------------------------Image Engine------------------------------------------
+    glidePackage = 'com.github.bumptech.glide'
+    hdodenhofPackage = 'de.hdodenhof'
+
+    glide = buildDepend(glidePackage, 'glide', glideVersion)
+    glideAPT = buildDepend(glidePackage, 'compiler', glideVersion)
+    circleImageView = buildDepend(hdodenhofPackage, 'circleimageview', circleImageVersion)
+
+//---------------------------------------------Test-------------------------------------------------
+    junitPackage = 'junit'
+    mockitoPackage = 'org.mockito'
+    robolectricPackage = 'org.robolectric'
+
+    testDp = [
+            junit      : buildDepend(junitPackage, 'junit', junitVersion),
+            mockito    : buildDepend(mockitoPackage, 'mockito-core', mockitoVersion),
+            robolectric: buildDepend(robolectricPackage, 'robolectric', robolectricVersion),
+    ]
+}
+
+static String buildDepend(String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
+}
