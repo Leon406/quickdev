@@ -17,10 +17,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '26.0.2'
+                }
+            }
+        }
+    }
 }
+
+
+
+
 
 dependencies {
 
-    compile project(':baselibs')
+    implementation  project(':baselibs')
     annotationProcessor knifeAPT //不能写在base库中
 }

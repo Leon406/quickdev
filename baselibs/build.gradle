@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion targetVer
     buildToolsVersion buildToolsVer
@@ -19,41 +19,53 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '26.0.2'
+                }
+            }
+        }
+    }
 }
 repositories {
     flatDir {
         dirs 'libs'
     }
 }
-
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    //本地库及aar
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile testDp.junit
     //   support lib
-    compile sup.appCompat
-    compile sup.recyclerView
+    api sup.appCompat
+    api sup.recyclerView
 //    compile sup.design
 //    compile sup.cardView
     //网络
     //图片
     //Rx
-    compile rx.java
-    compile rx.android
-    compile rx.binding
-    compile rx.life
-    compile rx.lifeAndroid
-    compile rx.lifeCmp
+    api rx.java
+    api rx.android
+    api rx.binding
+    api rx.life
+    api rx.lifeAndroid
+    api rx.lifeCmp
 
     //IOC
-    compile knife
-
+    api knife
+    api 'me.leon406:devsuit:1.0.2'
     //widget
     // 三方SDK
+    //test
+    testCompile testDp.junit
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }
 
 

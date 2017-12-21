@@ -1,13 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
 
-          package="me.leon.baselibs"
->
-
-    <application android:allowBackup="true"
-                 android:label="@string/app_name"
-                 android:supportsRtl="true"
-    >
-
+    package="me.leon.baselibs">
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <!--<meta-data-->
+            <!--android:name="Android.support.VERSION"-->
+            <!--android:value="26.0.2"-->
+            <!--tools:replace="android:value" />-->
     </application>
 
 </manifest>
