@@ -2,15 +2,16 @@ package me.leon.quickdev;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.squareup.leakcanary.LeakCanary;
+import com.umeng.analytics.MobclickAgent;
+
+import cn.jpush.android.api.JPushInterface;
+import me.leon.devsuit.android.CrashUtils;
 import me.leon.devsuit.android.Utils;
-import me.leon.libs.utils.CrashHandler;
 import me.leon.libs.utils.T;
 
 /**
@@ -29,14 +30,45 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (!initTool()) {
+            return;
+        }
         Log.d(TAG, "App Create");
-        CrashHandler.getInstance().init(this);
-//        Utils.init(this);
-        T.getInstance().init(this);
+        init3rdSdk();
 
-
-
+//        int s = 5 / 0;
         bindActivityLife();
+    }
+
+    /**
+     * 工具类初始化
+     *
+     * @return boolean
+     */
+    private boolean initTool() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return false;
+        }
+
+        LeakCanary.install(this);
+        Utils.init(this);
+        T.getInstance().init(this);
+        CrashUtils.init();
+        return true;
+    }
+
+    /**
+     * 三方SDK 初始化
+     */
+    private void init3rdSdk() {
+        // U-APP 初始化
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.setDebugMode(true);
+        //极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     /**
@@ -90,6 +122,7 @@ public class App extends Application {
 
             @Override
             public void onActivityDestroyed(Activity activity) {
+
                 Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityDestroyed");
             }
         });

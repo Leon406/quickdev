@@ -1,5 +1,6 @@
 package me.leon.quickdev;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -48,5 +49,6 @@ public class MainActivity extends BaseActivity {
             AnimateToast.show("hello",this,R.style.Lite_Animation_Toast);
             Flowable.timer(2,TimeUnit.SECONDS).compose(RxUtils.rxSwitch()).subscribe(l->AnimateToast.hide());
         new PopTop.Builder(this).setView(tv).show();
+        startActivity(new Intent(this,Main2Activity.class));
     }
 }

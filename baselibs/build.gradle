@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
+apply plugin: realmPlug
+
 android {
     compileSdkVersion targetVer
     buildToolsVersion buildToolsVer
@@ -29,6 +31,10 @@ android {
             }
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 repositories {
     flatDir {
@@ -48,6 +54,8 @@ dependencies {
 //    compile sup.cardView
     //网络
     //图片
+    api glide
+    annotationProcessor glideAPT
     //Rx
     api rx.java
     api rx.android
@@ -60,7 +68,12 @@ dependencies {
     api knife
     api 'me.leon406:devsuit:1.0.2'
     //widget
+
+    api recyclerAdapter
     // 三方SDK
+    api 'com.umeng.analytics:analytics:6.1.2'
+    api jpush.core
+    api jpush.push
     //test
     testCompile testDp.junit
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
