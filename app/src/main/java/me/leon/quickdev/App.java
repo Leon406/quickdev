@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.bilibili.socialize.share.core.BiliShare;
+import com.bilibili.socialize.share.core.BiliShareConfiguration;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
 import me.leon.devsuit.android.CrashUtils;
 import me.leon.devsuit.android.Utils;
+import me.leon.libs.engine.image.GlideImageDownloader;
 import me.leon.libs.utils.T;
 
 /**
@@ -55,6 +58,14 @@ public class App extends Application {
         Utils.init(this);
         T.getInstance().init(this);
         CrashUtils.init();
+        BiliShare.global()
+                .config(new BiliShareConfiguration.Builder(this)
+                        .qq("1106059675")
+                        .weixin("wx311952cca4d43c2d")
+                        .imageDownloader(new GlideImageDownloader())
+
+                        .build()
+                );
         return true;
     }
 
@@ -65,9 +76,9 @@ public class App extends Application {
         // U-APP 初始化
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         MobclickAgent.openActivityDurationTrack(false);
-        MobclickAgent.setDebugMode(true);
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
         //极光推送
-        JPushInterface.setDebugMode(true);
+        JPushInterface.setDebugMode(BuildConfig.DEBUG);
         JPushInterface.init(this);
     }
 

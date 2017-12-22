@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">baselibs</string>
+    <string name="share_success">分享成功</string>
+    <string name="share_fail">分享失败</string>
+    <string name="share_fail_uninstall">分享失败: 未安装%s</string>
+    <string name="share_cancel">分享取消</string>
+    <string name="hint_share_to">分享到</string>
+    <string name="share_wechat">微信好友</string>
+    <string name="share_discovery">朋友圈</string>
+    <string name="share_qq">QQ好友</string>
+    <string name="share_qzone">QQ空间</string>
+    <string name="hint_cancel">取消</string>
 </resources>

@@ -95,6 +95,8 @@ ext {
             core : "cn.jiguang.sdk:jcore:$jcoreVer",
             push :"cn.jiguang.sdk:jpush:$jpushVer"
     ]
+    umengVer = '6.1.2'
+    umeng="com.umeng.analytics:analytics:$umengVer"
 
 //---------------------------------------------Test-------------------------------------------------
     //Test

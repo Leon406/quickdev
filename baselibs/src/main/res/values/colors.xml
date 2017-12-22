@@ -5,4 +5,8 @@
     <color name="colorAccent">#303F9F</color>
     <color name="error">#FF4081</color>
     <color name="ok">#0FF0FF</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="second_text">#cecece</color>
+    <color name="primary_text">#000000</color>
 </resources>
