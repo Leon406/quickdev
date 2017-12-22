@@ -53,6 +53,8 @@ dependencies {
 //    compile sup.design
 //    compile sup.cardView
     //网络
+    api 'com.lzy.net:okgo:3.0.4'
+    api 'com.alibaba:fastjson:1.1.67.android'
     //图片
     api glide
     annotationProcessor glideAPT
