@@ -33,8 +33,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <!-- <meta-data tools:replace="android:value" android:name="Android.support.VERSION" android:value="26.1.0"/> -->
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="${UMENG_APPKEY}" />
@@ -61,8 +64,10 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="me.leon.quickdev" />
             </intent-filter>
         </activity>
@@ -71,7 +76,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity android:name=".ui.activity.main.MainActivity">
             <intent-filter>
@@ -80,7 +85,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.Main2Activity"></activity>
+        <activity android:name=".ui.activity.main2.Main2Activity"></activity>
     </application>
 
 </manifest>

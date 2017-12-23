@@ -12,8 +12,8 @@ import butterknife.OnClick;
 import io.reactivex.Flowable;
 import me.leon.libs.ShareDialog;
 import me.leon.libs.base.BaseActivity;
-import me.leon.quickdev.PopTop;
 import me.leon.quickdev.R;
+import me.leon.quickdev.ui.activity.main2.Main2Activity;
 //import me.leon.libs.utils.AnimateToast;
 //import me.leon.libs.utils.RxUtils;
 //import me.leon.libs.utils.T;
@@ -66,9 +66,8 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
 //        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
 //        T.getInstance().show("emmit success",T.ERR);
 //            Flowable.timer(2,TimeUnit.SECONDS).compose(RxUtils.rxSwitch()).subscribe(l->AnimateToast.hide());
-        new PopTop.Builder(this).setView(tv).show();
-//        startActivity(new Intent(this,Main2Activity.class));
-        share();
+        Main2Activity.start(this);
+
     }
 
     @Override

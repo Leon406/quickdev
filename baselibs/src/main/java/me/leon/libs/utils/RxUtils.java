@@ -24,8 +24,8 @@ public class RxUtils {
      * @Desc 线程切换 使用io密集型操作， 例如网络请求,数据库操作
      */
     public static <T> FlowableTransformer<T, T> rxSwitch() {
-        return observable -> observable.observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+        return observable -> observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
 
     }
 }

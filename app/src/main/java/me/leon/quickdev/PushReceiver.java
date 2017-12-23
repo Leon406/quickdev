@@ -6,7 +6,7 @@ import android.content.Intent;
 
 
 import cn.jpush.android.api.JPushInterface;
-import me.leon.quickdev.ui.activity.Main2Activity;
+import me.leon.quickdev.ui.activity.main2.Main2Activity;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
