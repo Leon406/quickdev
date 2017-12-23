@@ -1,7 +1,9 @@
 apply plugin: 'com.android.library'
 //apply plugin: 'realm-android'
 apply plugin: realmPlug
+apply plugin: 'com.github.dcendents.android-maven'
 
+group='com.github.Leon406'
 android {
     compileSdkVersion targetVer
     buildToolsVersion buildToolsVer
