@@ -18,13 +18,9 @@ import com.bilibili.socialize.share.util.ShareUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatDialogFragment;
 
 import me.leon.baselibs.R;
+import me.leon.libs.utils.T;
 //import me.leon.libs.utils.T;
 
-/**
- * Author:  Parorisim
- * Time:    2017/5/17 下午3:14
- * Desc:    分享弹窗
- */
 
 public class ShareDialog extends RxAppCompatDialogFragment {
 
@@ -54,7 +50,7 @@ public class ShareDialog extends RxAppCompatDialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_share, container, false);
         view.findViewById(R.id.tv_cancel).setOnClickListener(v -> dismiss());
         view.findViewById(R.id.ll_wechat).setOnClickListener(v -> doShare(TO_WECHAT));
@@ -71,28 +67,28 @@ public class ShareDialog extends RxAppCompatDialogFragment {
             case TO_WECHAT:
                 socializeMedia = SocializeMedia.WEIXIN;
                 if (!ShareUtils.isWeixinAvilible(getContext())) {
-//                    T.getInstance().show(getString(R.string.share_fail_uninstall,"微信"),T.ERR);
+                    T.getInstance().show(getString(R.string.share_fail_uninstall,"微信"),T.ERR);
                     return;
                 }
                 break;
             case TO_DISCOVERY:
                 socializeMedia = SocializeMedia.WEIXIN_MONMENT;
                 if (!ShareUtils.isWeixinAvilible(getContext())) {
-//                    T.getInstance().show(getString(R.string.share_fail_uninstall,"微信"),T.ERR);
+                    T.getInstance().show(getString(R.string.share_fail_uninstall,"微信"),T.ERR);
                     return;
                 }
                 break;
             case TO_QQ:
                 socializeMedia = SocializeMedia.QQ;
                 if (!ShareUtils.isQQClientAvailable(getContext())) {
-//                    T.getInstance().show(getString(R.string.share_fail_uninstall,"QQ"),T.ERR);
+                    T.getInstance().show(getString(R.string.share_fail_uninstall,"QQ"),T.ERR);
                     return;
                 }
                 break;
             case TO_QZONE:
                 socializeMedia = SocializeMedia.QZONE;
                 if (!ShareUtils.isQQClientAvailable(getContext())) {
-//                    T.getInstance().show(getString(R.string.share_fail_uninstall,"QQ"),T.ERR);
+                    T.getInstance().show(getString(R.string.share_fail_uninstall,"QQ"),T.ERR);
                     return;
                 }
                 break;
@@ -116,17 +112,17 @@ public class ShareDialog extends RxAppCompatDialogFragment {
 
             @Override
             public void onSuccess(SocializeMedia type, int code) {
-//                T.getInstance().show(R.string.share_success,T.OK);
+                T.getInstance().show(R.string.share_success,T.OK);
             }
 
             @Override
             public void onError(SocializeMedia type, int code, Throwable error) {
-//                T.getInstance().show(R.string.share_fail,T.ERR);
+                T.getInstance().show(R.string.share_fail,T.ERR);
             }
 
             @Override
             public void onCancel(SocializeMedia type) {
-//                T.getInstance().show(R.string.share_cancel,T.ERR);
+                T.getInstance().show(R.string.share_cancel,T.ERR);
             }
         });
     }

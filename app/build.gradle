@@ -79,7 +79,9 @@ dependencies {
     kapt knifeAPT //不能写在base库中
     releaseImplementation leakcanary.release
     debugImplementation leakcanary.debug
+    implementation jpush.core
 
+    implementation jpush.push
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 

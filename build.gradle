@@ -1,5 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+//添加
+ext {
+    userOrg = 'leonlambert'
+    groupId = 'me.leon406'
+    uploadName = 'RxBus2'
+    publishVersion = '1.0.1'
+    desc = 'A Event Bus, support sticky event,based on RxJava2'
+    website = 'https://github.com/Leon406'
+    licences = ['Apache-2.0']
+}
 buildscript { 
     ext.kotlin_version = '1.1.51'
 
@@ -12,7 +21,8 @@ buildscript {
         classpath gradlePlug
         classpath kotlin
         classpath realm
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" }

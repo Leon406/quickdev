@@ -27,6 +27,7 @@ import me.leon.devsuit.android.CrashUtils;
 import me.leon.devsuit.android.Utils;
 import me.leon.libs.engine.http.LoggerInterceptor;
 import me.leon.libs.engine.image.GlideImageDownloader;
+import me.leon.libs.utils.T;
 import okhttp3.OkHttpClient;
 //import me.leon.libs.utils.T;
 
@@ -70,7 +71,7 @@ public class App extends Application {
 
         LeakCanary.install(this);
         Utils.init(this);
-//        T.getInstance().init(this);
+        T.getInstance().init(this);
         CrashUtils.init();
         BiliShare.global()
                 .config(new BiliShareConfiguration.Builder(this)
@@ -90,7 +91,6 @@ public class App extends Application {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(config);
-
         return true;
     }
 
