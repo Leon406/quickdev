@@ -4,8 +4,8 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import java.lang.ref.WeakReference;
 
 /**
- * Author:  Leon
- * Time:    2017/4/5 上午11:33
+ * @Author:  Leon
+ * @Time:    2017/4/5 上午11:33
  */
 
 public abstract class BasePresenter<V extends IView> implements IPresenter<V> {

@@ -27,8 +27,6 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 public abstract class BaseFragment<V extends IView, P extends BasePresenter<V>> extends RxFragment {
 
     private P mPresenter;
-    public Dialog dialog;
-
     @Override
     public void onResume() {
         super.onResume();
@@ -48,7 +46,9 @@ public abstract class BaseFragment<V extends IView, P extends BasePresenter<V>> 
         // 初始化 Presenter
         mPresenter = bindPresenter();
         // Presenter 绑定 View
-        if (mPresenter != null) mPresenter.attachView((V) this);
+        if (mPresenter != null) {
+            mPresenter.attachView((V) this);
+        }
     }
 
     @Nullable
@@ -61,37 +61,16 @@ public abstract class BaseFragment<V extends IView, P extends BasePresenter<V>> 
         return view;
     }
 
-    protected void showDialog(boolean isShow) {
-        if (isShow) {
-            if (dialog != null && !dialog.isShowing()) {
-                dialog.show();
-            }
-        } else {
-            if (dialog != null && dialog.isShowing()) {
-                dialog.dismiss();
-            }
-        }
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // 视图初始化
         onViewInit();
-
     }
-
-    protected void reLoad() {
-    }
-
-    protected void doReload() {
-        reLoad();
-    }
-
 
     /**
-     * 优化滚动加载数据
-     *
+     * 优化滚动加载数据  滑动时不加载图片
      * @param rv
      */
     protected void optimizeRecyclerViewScrollLoadImage(RecyclerView rv) {

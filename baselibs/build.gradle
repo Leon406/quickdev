@@ -75,6 +75,7 @@ dependencies {
     // 三方SDK
     api umeng
     api jpush.core
+
     api jpush.push
     api 'me.leon406:bililibrary:1.0'//分享
     //test

@@ -19,17 +19,13 @@ import me.leon.libs.engine.image.GlideApp;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
- * Author:  Parorisim
- * Time:    2017/4/5 上午11:29
- * Desc:    活动基类
+ * @Author:  Leon
+ * @Time:    2017/4/5 上午11:29
  */
 
 public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> extends RxAppCompatActivity {
 
     private P mPresenter;
-    public Dialog dialog;
-    protected boolean isDarkStatusBar = true;
-
     @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +35,9 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
         // 初始化 Presenter
         mPresenter = bindPresenter();
         // Presenter 绑定 View
-        if (mPresenter != null) mPresenter.attachView((V) this);
+        if (mPresenter != null) {
+            mPresenter.attachView((V) this);
+        }
 
         setContentView(bindLayout());
         // 绑定布局
@@ -52,7 +50,9 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
     protected void onDestroy() {
         super.onDestroy();
         // Presenter 解绑 View
-        if (mPresenter != null) mPresenter.detachView();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
     }
 
     @Override
@@ -68,7 +68,7 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
     }
 
     /**
-     * 优化列表滑动
+     * 优化列表滑动,滑动时不加载图片
      * @param rv
      */
     protected void optimizeRecyclerViewScrollLoadImage(RecyclerView rv) {

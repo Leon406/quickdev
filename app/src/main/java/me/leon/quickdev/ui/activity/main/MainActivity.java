@@ -1,34 +1,24 @@
-package me.leon.quickdev.ui.activity;
+package me.leon.quickdev.ui.activity.main;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bilibili.socialize.share.core.BiliShare;
-import com.bilibili.socialize.share.core.shareparam.BaseShareParam;
 import com.bilibili.socialize.share.core.shareparam.ShareImage;
 import com.bilibili.socialize.share.core.shareparam.ShareParamWebPage;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Flowable;
 import me.leon.libs.ShareDialog;
 import me.leon.libs.base.BaseActivity;
-import me.leon.libs.base.BasePresenter;
 import me.leon.quickdev.PopTop;
 import me.leon.quickdev.R;
 //import me.leon.libs.utils.AnimateToast;
 //import me.leon.libs.utils.RxUtils;
 //import me.leon.libs.utils.T;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<MainContract.View,MainPresenter>  implements MainContract.View {
 
     @BindView(R.id.tv)
     TextView tv;
@@ -40,8 +30,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter bindPresenter() {
-        return null;
+    protected MainPresenter bindPresenter() {
+        return new MainPresenter(this);
     }
 
     @Override
@@ -55,6 +45,9 @@ public class MainActivity extends BaseActivity {
                 .filter(integer -> integer>2)
 //                .compose(RxUtils.rxSwitch())
                 .subscribe(System.out::println);
+
+        getPresenter().doFetch();
+        getPresenter().doFetchList();
     }
 
     private void share() {
@@ -76,5 +69,20 @@ public class MainActivity extends BaseActivity {
         new PopTop.Builder(this).setView(tv).show();
 //        startActivity(new Intent(this,Main2Activity.class));
         share();
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onFail(Throwable e) {
+
+    }
+
+    @Override
+    public void onFetchSuccess() {
+
     }
 }

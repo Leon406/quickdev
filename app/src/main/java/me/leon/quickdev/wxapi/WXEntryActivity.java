@@ -1,7 +1,7 @@
 package me.leon.quickdev.wxapi;
 
 import com.bilibili.socialize.share.core.ui.BaseWXEntryActivity;
-import me.leon.quickdev.Config;
+import me.leon.libs.Config;
 
 /**
  * Author:  Parorisim

@@ -11,7 +11,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import me.leon.quickdev.Config;
+import me.leon.libs.Config;
 
 /**
  * Author:  Leon

@@ -1,8 +1,8 @@
 package me.leon.libs.base;
 
 /**
- * Author:  Leon
- * Time:    2017/4/5 上午11:31
+ * @Author:  Leon
+ * @Time:    2017/4/5 上午11:31
  */
 
 public interface IPresenter<V extends IView> {
