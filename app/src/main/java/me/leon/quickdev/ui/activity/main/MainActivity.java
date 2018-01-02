@@ -1,5 +1,6 @@
 package me.leon.quickdev.ui.activity.main;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.bilibili.socialize.share.core.shareparam.ShareImage;
@@ -14,6 +15,7 @@ import me.leon.libs.ShareDialog;
 import me.leon.libs.base.BaseActivity;
 import me.leon.quickdev.R;
 import me.leon.quickdev.ui.activity.main2.Main2Activity;
+import me.leon.quickdev.widget.dialog.FragDialog;
 //import me.leon.libs.utils.AnimateToast;
 //import me.leon.libs.utils.RxUtils;
 //import me.leon.libs.utils.T;
@@ -39,7 +41,7 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
         //延时
         Flowable.timer(1000, TimeUnit.MILLISECONDS)
 //                .compose(RxUtils.rxSwitch())
-                .subscribe(l ->share());
+                .blockingSubscribe(l ->share());
         Flowable.just(1,2,3,4,5,6,7)
                 .delay(3000,TimeUnit.MILLISECONDS)
                 .filter(integer -> integer>2)
@@ -51,14 +53,19 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
     }
 
     private void share() {
+//        View decorView = getWindow().getDecorView();
+//        int option = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        decorView.setSystemUiVisibility(option);
 
-        ShareParamWebPage param = new ShareParamWebPage();
-        param.setTitle("titel");
-        param.setContent("this content");
-        param.setTargetUrl("http://api.01yuelao.com/two/web/userview/id/281763.html");
-        param.setThumb(new ShareImage(R.drawable.share_wechat));
+        FragDialog.newInstance().show(getSupportFragmentManager(),null);
 
-        ShareDialog.getNewInstance(param).show(getSupportFragmentManager(),null);
+//        ShareParamWebPage param = new ShareParamWebPage();
+//        param.setTitle("titel");
+//        param.setContent("this content");
+//        param.setTargetUrl("http://api.01yuelao.com/two/web/userview/id/281763.html");
+//        param.setThumb(new ShareImage(R.drawable.share_wechat));
+//
+//        ShareDialog.getNewInstance(param).show(getSupportFragmentManager(),null);
     }
 
     @OnClick(R.id.tv)

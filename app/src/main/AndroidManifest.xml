@@ -34,9 +34,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- <meta-data tools:replace="android:value" android:name="Android.support.VERSION" android:value="26.1.0"/> -->
-
+        <!--8.0以下适配-->
         <meta-data
             android:name="android.max_aspect"
+            android:value="2.1" />
+        <!--8.0+适配-->
+        <meta-data
+            android:name="android:MaxAspectRatio"
             android:value="2.1" />
         <meta-data
             android:name="UMENG_APPKEY"
