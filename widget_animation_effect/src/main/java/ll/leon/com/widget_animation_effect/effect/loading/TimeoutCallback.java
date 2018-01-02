@@ -1,9 +1,5 @@
 package ll.leon.com.widget_animation_effect.effect.loading;
 
-import android.content.Context;
-import android.view.View;
-import android.widget.Toast;
-
 import com.kingja.loadsir.callback.Callback;
 
 import ll.leon.com.widget_animation_effect.R;

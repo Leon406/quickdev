@@ -1,18 +1,14 @@
 package ll.leon.com.widget_animation_effect;
 
-import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
-import com.kingja.loadsir.core.Transport;
 
 import java.util.Random;
 import java.util.Timer;
@@ -39,34 +35,16 @@ public class MainActivity extends AppCompatActivity {
         mHeartLayout = (HeartLayout) findViewById(R.id.heart_layout);
         rippleView = ((RippleView) findViewById(R.id.ripple));
         container = findViewById(R.id.container);
-        loadService = LoadSir.getDefault().register(container, new Callback.OnReloadListener() {
-            @Override
-            public void onReload(View v) {
-                loadService.showSuccess();
+        loadService = LoadSir.getDefault()
+                .register(container, v -> loadService.showSuccess());
 
-            }
-        });
+        loadService.setCallBack(ErrorCallback.class, (context, view) ->
+                ((TextView) view.findViewById(R.id.tv_err)).setText("Err!!!"));
 
-        loadService.setCallBack(ErrorCallback.class, (context, view) -> {
-                    ((TextView) view.findViewById(R.id.tv_err)).setText("Err!!!");
-
-                }
-
-        );
-
-        new Thread() {
-
-            @Override
-            public void run() {
-                SystemClock.sleep(1000);
-                loadService.showCallback(ErrorCallback.class);
-//                runOnUiThread(() -> loadService.showCallback(ErrorCallback.class));
-
-
-            }
-        }.start();
-
-
+        new Thread(() -> {
+            SystemClock.sleep(1000);
+            loadService.showCallback(ErrorCallback.class);
+        }).start();
     }
 
     private void show() {
