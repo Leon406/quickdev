@@ -1,16 +1,20 @@
 package me.leon.quickdev.ui.entry.main;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding2.view.RxView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import io.reactivex.Flowable;
+import me.leon.devsuit.android.IntentUtils;
 import me.leon.libs.base.RightSwipeBaseActivity;
 import me.leon.libs.utils.RxUtils;
 import me.leon.libs.utils.T;
@@ -23,10 +27,11 @@ import me.leon.quickdev.utils.LocationUtils;
 //import me.leon.libs.utils.RxUtils;
 //import me.leon.libs.utils.T;
 
-public class MainActivity extends RightSwipeBaseActivity<MainContract.View,MainPresenter> implements MainContract.View {
+public class MainActivity extends RightSwipeBaseActivity<MainContract.View, MainPresenter> implements MainContract.View {
 
     @BindView(R.id.tv)
     TextView tv;
+    private RxPermissions rxPermissions;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
@@ -49,15 +54,36 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View,MainP
         //延时
         Flowable.timer(1000, TimeUnit.MILLISECONDS)
 //                .compose(RxUtils.rxSwitch())
-                .blockingSubscribe(l ->share());
-        Flowable.just(1,2,3,4,5,6,7)
-                .delay(3000,TimeUnit.MILLISECONDS)
-                .filter(integer -> integer>2)
+                .blockingSubscribe(l -> share());
+        Flowable.just(1, 2, 3, 4, 5, 6, 7)
+                .delay(3000, TimeUnit.MILLISECONDS)
+                .filter(integer -> integer > 2)
 //                .compose(RxUtils.rxSwitch())
-                .subscribe(l->showLocation());
+                .subscribe(l -> showLocation());
+
+        rxPermissions = new RxPermissions(this);
 
         getPresenter().doFetch();
         getPresenter().doFetchList();
+
+
+        RxView.clicks(tv)
+                .compose(rxPermissions.ensure(Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                .subscribe(granted -> {
+                    if (granted) { // Always true pre-M
+                        onViewClicked();
+                        // I can control the camera now
+//                    } else if (permission.shouldShowRequestPermissionRationale) {
+//                        T.getInstance().show("请先授权!!!", T.ERR);
+                    } else {
+                        Intent intent = IntentUtils.getAppDetailsSettingsIntent(getPackageName());
+                        startActivity(intent);
+                        T.getInstance().show("请先手动授权!!!", T.ERR);
+                    }
+                });
+
+
     }
 
     private void showLocation() {
@@ -84,7 +110,7 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View,MainP
 //        ShareDialog.getNewInstance(param).show(getSupportFragmentManager(),null);
     }
 
-    @OnClick(R.id.tv)
+    // @OnClick(R.id.tv)
     public void onViewClicked() {
 //        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
 //        T.getInstance().show("emmit success",T.ERR);
@@ -95,7 +121,7 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View,MainP
 
     @Override
     public void onError(Throwable e) {
-        T.getInstance().show(e.getMessage(),T.ERR);
+        T.getInstance().show(e.getMessage(), T.ERR);
     }
 
 

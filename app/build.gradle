@@ -115,9 +115,11 @@ dependencies {
     implementation jpush.core
     implementation jpush.push
     implementation photoView
+    implementation rx.permission
 //    implementation aMap.map3d
     implementation 'com.amap.api:location:3.4.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer"
+    testImplementation 'junit:junit:4.12'
 }
 
 apply plugin: 'kotlin-android'

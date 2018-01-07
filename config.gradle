@@ -1,14 +1,14 @@
 ext {
 //---------------------------------------- keystore & IDE -----------------------------------------
-    buildToolsVer = '26.0.2'
-    minVer = 16
+    buildToolsVer = '27.0.1'
+    minVer = 19
     targetVer = 26
 
     pwd = "panda931020"
     alias = "love_u"
 
 //----------------------------------------classpath & plugs-----------------------------------------
-    gradleVer = '3.1.0-alpha05'
+    gradleVer = '3.1.0-alpha07'
     gradlePlug = "com.android.tools.build:gradle:$gradleVer"
 
     kotlinVer = '1.2.0'
@@ -44,6 +44,7 @@ ext {
     rxJavaVersion = '2.1.7'
     rxLifeCycleVersion = '2.2.1'
     rxBindVersion = '2.0.0'
+    rxPermissionVersion = '0.9.4'
 
     rx = [
             android     : buildDepend(reactivePackage, 'rxandroid', rxAndroidVersion),
@@ -51,7 +52,7 @@ ext {
             life        : "com.trello.rxlifecycle2:rxlifecycle:$rxLifeCycleVersion",
             lifeAndroid : "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifeCycleVersion",
             lifeCmp     : "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifeCycleVersion",
-
+            permission  : "com.tbruyelle.rxpermissions2:rxpermissions:${rxPermissionVersion}@aar",
             binding     : "com.jakewharton.rxbinding2:rxbinding:$rxBindVersion",
             bindSup     : "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindVersion",
             bindCompat  : "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindVersion",
