@@ -2,4 +2,8 @@
     <string name="app_name">QuickDev</string>
     <string name="hint_time">还有%dS (跳过)</string>
     <string name="title_gallery">%1$d/%2$d</string>
+
+    <string name="guide_tilte_1">引导1</string>
+    <string name="guide_tilte_2">引导2</string>
+    <string name="guide_tilte_3">引导3</string>
 </resources>

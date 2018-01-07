@@ -6,11 +6,13 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
+import me.leon.devsuit.android.SPUtils;
 import me.leon.libs.base.BaseActivity;
 import me.leon.libs.base.BasePresenter;
 import me.leon.libs.utils.RxUtils;
 import me.leon.quickdev.R;
 import me.leon.quickdev.ui.entry.main.MainActivity;
+import me.leon.quickdev.ui.entry.welcome.WelcomeActivity;
 
 public class SplashActivity extends BaseActivity {
 
@@ -43,7 +45,13 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void enter() {
-        MainActivity.start(this);
+        if (SPUtils.getInstance("setting").getBoolean("isShowWelcome",false)) {
+            MainActivity.start(this);
+        }else {
+            WelcomeActivity.start(this);
+        }
+
+
         finish();
     }private void enter(long aLong) {
        btn.setText(getString(R.string.hint_time,3 - aLong));
