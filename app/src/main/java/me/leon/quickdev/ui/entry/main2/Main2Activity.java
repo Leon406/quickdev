@@ -1,4 +1,4 @@
-package me.leon.quickdev.ui.activity.main2;
+package me.leon.quickdev.ui.entry.main2;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,22 +6,22 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import me.leon.libs.base.BaseActivity;
-import me.leon.libs.base.BasePresenter;
+import io.reactivex.Flowable;
+import me.leon.libs.base.RightSwipeBaseActivity;
 import me.leon.quickdev.R;
 import me.leon.quickdev.bean.Meizi;
-import me.leon.quickdev.ui.adapter.MeiZiAdapter;
+import me.leon.quickdev.ui.entry.gallery.GalleryActivity;
 
 /**
  * Created by PC on 2017/12/22.
+
  */
 
-public class Main2Activity extends BaseActivity<Main2Contract.View,Main2Presenter> implements Main2Contract.View {
+public class Main2Activity extends RightSwipeBaseActivity<Main2Contract.View, Main2Presenter> implements Main2Contract.View {
 
     @BindView(R.id.rv)
     RecyclerView rv;
@@ -29,6 +29,7 @@ public class Main2Activity extends BaseActivity<Main2Contract.View,Main2Presente
     SwipeRefreshLayout srl;
     private int page = 1;
     private MeiZiAdapter adapter;
+    private LinearLayoutManager layoutManager;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, Main2Activity.class);
@@ -49,25 +50,31 @@ public class Main2Activity extends BaseActivity<Main2Contract.View,Main2Presente
     @Override
     protected void onViewInit() {
 
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv.setLayoutManager(layoutManager);
         adapter = new MeiZiAdapter(R.layout.item_meizi);
         rv.setAdapter(adapter);
-        adapter.setOnLoadMoreListener(()->{
-            getPresenter().doFetch(++page);
+        adapter.setOnLoadMoreListener(() -> getPresenter().doFetch(++page), rv);
 
-        },
-                rv);
+        adapter.setOnItemChildClickListener((adapter, v, pos) ->
+                Flowable.fromIterable(((MeiZiAdapter) adapter).getData())
+                        .map(o -> o.url)
+                        .toList()
+                        .subscribe(urls ->
+                                GalleryActivity.start(this, pos, ((ArrayList<String>) urls)))
+        );
 
-        srl.setOnRefreshListener(()->{
+        handleTouchEventConflict(rv);
+
+        srl.setOnRefreshListener(() -> {
             srl.setRefreshing(true);
-            getPresenter().doFetch(page =1);
+            getPresenter().doFetch(page = 1);
 
         });
         optimizeRecyclerViewScrollLoadImage(rv);
 
-
         getPresenter().doFetch(page);
-
 
     }
 
@@ -75,28 +82,26 @@ public class Main2Activity extends BaseActivity<Main2Contract.View,Main2Presente
     @Override
     public void onError(Throwable e) {
         srl.setRefreshing(false);
+        adapter.loadMoreFail();
     }
 
-    @Override
-    public void onFail(Throwable e) {
-        srl.setRefreshing(false);
-    }
 
     @Override
     public void onFetchSuccess(List<Meizi.Results> results) {
         srl.setRefreshing(false);
-        if (page ==1) {
+        if (page == 1) {
             adapter.setNewData(results);
-        }else {
+        } else {
             adapter.addData(results);
         }
 
-        if ( results.size() ==0) {
+        if (results.size() == 0) {
 
             adapter.loadMoreEnd();
 
-        }else {
+        } else {
             adapter.loadMoreComplete();
         }
     }
+
 }

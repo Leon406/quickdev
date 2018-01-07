@@ -21,10 +21,17 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="me.leon.quickdev.permission.RECEIVE_MSG" />
+
     <permission
         android:name="me.leon.quickdev.permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -33,12 +40,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- <meta-data tools:replace="android:value" android:name="Android.support.VERSION" android:value="26.1.0"/> -->
-        <!--8.0以下适配-->
+        <!-- 8.0以下适配 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
-        <!--8.0+适配-->
+        <!-- 8.0+适配 -->
         <meta-data
             android:name="android:MaxAspectRatio"
             android:value="2.1" />
@@ -48,7 +56,11 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL}" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${AMap}" />
 
+        <service android:name="com.amap.api.location.APSService" />
         <!-- 推送广播接收 -->
         <receiver
             android:name=".PushReceiver"
@@ -81,15 +93,31 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-        <activity android:name=".ui.activity.main.MainActivity">
+        <activity android:name=".ui.entry.splash.SplashActivity"
+            android:theme="@style/SplashTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.main2.Main2Activity"></activity>
+        <activity android:name=".ui.entry.main2.Main2Activity" />
+
+        <activity
+            android:name=".ui.entry.main.MainActivity"
+            android:label="QuickDev"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.entry.gallery.GalleryActivity"
+            android:label="Gallery"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.entry.welcome.WelcomeActivity"
+            android:label="欢迎界面"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

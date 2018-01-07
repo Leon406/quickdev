@@ -1,4 +1,4 @@
-package me.leon.quickdev.ui.activity.main;
+package me.leon.quickdev.ui.entry.main;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -10,6 +10,8 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import me.leon.libs.base.BasePresenter;
 import me.leon.libs.engine.http.API;
 import me.leon.libs.utils.M;
+import me.leon.quickdev.bean.SimpleUser;
+import me.leon.quickdev.ui.entry.main2.JsonCallback;
 
 /**
  * Created by PC on 2017/12/23.
@@ -27,8 +29,9 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         API.buildRequest(new HttpParams(),API.PUBLICINFO).execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                getView().onFetchSuccess();
+               // getView().onFetchSuccess();
             }
+
 
 
         });
@@ -40,10 +43,17 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         params.put("sex", 1);
         params.put("city", "杭州市");
 
-        API.buildRequest(params, API.LOOKLIST).execute(new StringCallback() {
+        API.buildRequest(params, API.LOOKLIST).execute(new JsonCallback<JSONArray>(getProvider()) {
+
+
+                @Override
+                protected void onSuccess(JSONArray data) {
+                    getView().onFetchSuccess(JSON.parseArray(data.toJSONString(), SimpleUser.class));
+            }
+
             @Override
-            public void onSuccess(Response<String> response) {
-//                getView().onFetchSuccess(response.body());
+            protected void onFailure(Throwable throwable) {
+                getView().onError(throwable);
             }
         });
     }

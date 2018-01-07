@@ -1,4 +1,4 @@
-package me.leon.quickdev.ui.activity.main2;
+package me.leon.quickdev.ui.entry.main2;
 
 import java.util.List;
 

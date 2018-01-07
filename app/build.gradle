@@ -24,7 +24,8 @@ android {
                 JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "b95be6a928154da14de35764", // 极光key
                 JPUSH_CHANNEL: "default", //暂时填写默认值即可.
-                UMENG_APPKEY : "5a3cb44cf29d985cb7000211" //  umeng key
+                UMENG_APPKEY : "5a3cb44cf29d985cb7000211", //  umeng key
+                AMap         : "3d415ef287bdcd5fc13012a327e086bd" //  高德 key
         ]
     }
     signingConfigs {
@@ -33,6 +34,15 @@ android {
             keyPassword pwd
             storeFile file('../keystore.jks')
             storePassword pwd
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        official {
+//            resValue "string", "app_name", "LoveU"
+            manifestPlaceholders = [
+                    UMENG_CHANNEL: 'OFFICIAL',
+                    JPUSH_CHANNEL: 'OFFICIAL']
         }
     }
     buildTypes {
@@ -103,8 +113,10 @@ dependencies {
     releaseImplementation leakcanary.release
     debugImplementation leakcanary.debug
     implementation jpush.core
-
     implementation jpush.push
+    implementation photoView
+//    implementation aMap.map3d
+    implementation 'com.amap.api:location:3.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 

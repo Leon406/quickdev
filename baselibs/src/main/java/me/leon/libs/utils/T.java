@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -50,7 +49,7 @@ public class T {
     @SuppressLint("ShowToast")
     public void init(Context context) {
         mContext = context;
-        mToast = Toast.makeText(mContext, null, Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
         mToast.setView(LayoutInflater.from(mContext).inflate(R.layout.view_toast, null));
 
         mToast.getView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);

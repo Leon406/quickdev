@@ -1,6 +1,4 @@
-package me.leon.quickdev.ui.adapter;
-
-import android.support.v7.widget.RecyclerView;
+package me.leon.quickdev.ui.entry.main2;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,6 +20,7 @@ public class MeiZiAdapter extends BaseQuickAdapter<Meizi.Results,BaseViewHolder>
     protected void convert(BaseViewHolder helper, Meizi.Results item) {
 
         L.getInstance().load(item.url,helper.getView(R.id.iv),R.drawable.default_share_image);
+        helper.addOnClickListener(R.id.iv);
     }
 
 }

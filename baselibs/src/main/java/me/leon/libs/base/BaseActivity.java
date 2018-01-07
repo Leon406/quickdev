@@ -1,14 +1,11 @@
 package me.leon.libs.base;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
-
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -19,13 +16,14 @@ import me.leon.libs.engine.image.GlideApp;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
- * @Author:  Leon
- * @Time:    2017/4/5 上午11:29
+ * @Author: Leon
+ * @Time: 2017/4/5 上午11:29
  */
 
 public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> extends RxAppCompatActivity {
 
     private P mPresenter;
+
     @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +67,7 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
 
     /**
      * 优化列表滑动,滑动时不加载图片
+     *
      * @param rv
      */
     protected void optimizeRecyclerViewScrollLoadImage(RecyclerView rv) {
@@ -94,6 +93,7 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
 
     /**
      * 获取 Presenter 实例
+     *
      * @return Presenter
      */
     @NonNull
@@ -103,6 +103,7 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
 
     /**
      * 绑定布局
+     *
      * @return 布局资源 ID
      */
     @LayoutRes
@@ -110,6 +111,7 @@ public abstract class BaseActivity<V extends IView, P extends BasePresenter<V>> 
 
     /**
      * 绑定 Presenter
+     *
      * @return Presenter
      */
     protected abstract P bindPresenter();

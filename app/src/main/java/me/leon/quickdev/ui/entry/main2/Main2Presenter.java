@@ -1,10 +1,11 @@
-package me.leon.quickdev.ui.activity.main2;
+package me.leon.quickdev.ui.entry.main2;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.request.GetRequest;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.List;
 
@@ -28,15 +29,15 @@ public class Main2Presenter extends BasePresenter<Main2Contract.View> implements
         try {
             GetRequest request = OkGo.get("http://gank.io/api/data/福利/10/" + page);
 
-            Flowable.just(request)
-                    .map(req->request.execute())
+            Flowable.fromCallable(() -> request.execute())
+                    .compose(((RxAppCompatActivity) getProvider()).bindToLifecycle())
                     .compose(RxUtils.rxSwitch())
-                    .subscribe(res->{
+                    .subscribe(res -> {
                         JSONObject parseObject = JSONObject.parseObject(res.body().string());
                         List<Meizi.Results> results
                                 = JSONArray.parseArray(parseObject.getString("results"), Meizi.Results.class);
 
-                            getView().onFetchSuccess(results);
+                        getView().onFetchSuccess(results);
 
                     });
         } catch (Exception e) {

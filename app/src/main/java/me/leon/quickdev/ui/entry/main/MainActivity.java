@@ -1,30 +1,38 @@
-package me.leon.quickdev.ui.activity.main;
+package me.leon.quickdev.ui.entry.main;
 
-import android.view.View;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.widget.TextView;
 
-import com.bilibili.socialize.share.core.shareparam.ShareImage;
-import com.bilibili.socialize.share.core.shareparam.ShareParamWebPage;
-
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Flowable;
-import me.leon.libs.ShareDialog;
-import me.leon.libs.base.BaseActivity;
+import me.leon.libs.base.RightSwipeBaseActivity;
+import me.leon.libs.utils.RxUtils;
+import me.leon.libs.utils.T;
+import me.leon.quickdev.BuildConfig;
 import me.leon.quickdev.R;
-import me.leon.quickdev.ui.activity.main2.Main2Activity;
-import me.leon.quickdev.widget.dialog.FragDialog;
+import me.leon.quickdev.bean.SimpleUser;
+import me.leon.quickdev.ui.entry.main2.Main2Activity;
+import me.leon.quickdev.utils.LocationUtils;
 //import me.leon.libs.utils.AnimateToast;
 //import me.leon.libs.utils.RxUtils;
 //import me.leon.libs.utils.T;
 
-public class MainActivity extends BaseActivity<MainContract.View,MainPresenter>  implements MainContract.View {
+public class MainActivity extends RightSwipeBaseActivity<MainContract.View,MainPresenter> implements MainContract.View {
 
     @BindView(R.id.tv)
     TextView tv;
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainActivity.class);
+        //starter.putExtra();
+        context.startActivity(starter);
+    }
 
     @Override
     protected int bindLayout() {
@@ -46,10 +54,17 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
                 .delay(3000,TimeUnit.MILLISECONDS)
                 .filter(integer -> integer>2)
 //                .compose(RxUtils.rxSwitch())
-                .subscribe(System.out::println);
+                .subscribe(l->showLocation());
 
         getPresenter().doFetch();
         getPresenter().doFetchList();
+    }
+
+    private void showLocation() {
+        LocationUtils.getLocation(location -> {
+
+            if (BuildConfig.DEBUG) Log.d("MainActivity", location.getAddress());
+        });
     }
 
     private void share() {
@@ -57,7 +72,8 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
 //        int option = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
 //        decorView.setSystemUiVisibility(option);
 
-        FragDialog.newInstance().show(getSupportFragmentManager(),null);
+//        FragDialog.newInstance().show(getSupportFragmentManager(),null);
+
 
 //        ShareParamWebPage param = new ShareParamWebPage();
 //        param.setTitle("titel");
@@ -79,16 +95,16 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
 
     @Override
     public void onError(Throwable e) {
-
+        T.getInstance().show(e.getMessage(),T.ERR);
     }
 
-    @Override
-    public void onFail(Throwable e) {
-
-    }
 
     @Override
-    public void onFetchSuccess() {
+    public void onFetchSuccess(List<SimpleUser> user) {
+
+        Flowable.fromIterable(user)
+                .compose(RxUtils.rxSwitch())
+                .subscribe(usr -> Log.d("MainActivity", usr.getNickName()));
 
     }
 }

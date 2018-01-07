@@ -10,4 +10,6 @@ public interface Config {
     public static final String APP_ID_WECHAT = "wx311952cca4d43c2d";
     public static final String APP_ID_QQ = "1106059675";
     public static final String API_KEY = "loveu123456";
+    public static final String BUNDLE_POSITION ="position";
+    public static final String BUNDLE_DATA ="bundle_data";
 }

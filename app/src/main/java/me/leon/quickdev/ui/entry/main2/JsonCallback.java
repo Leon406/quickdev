@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.leon.quickdev.ui.activity.main2;
+package me.leon.quickdev.ui.entry.main2;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -34,16 +34,12 @@ import me.leon.libs.utils.RxUtils;
 import okhttp3.Response;
 
 /**
- * ================================================
- * 作    者：jeasonlzy（廖子尧）Github地址：https://github.com/jeasonlzy
- * 版    本：1.0
- * 创建日期：2016/1/14
- * 描    述：默认将返回的数据解析成需要的Bean,可以是 BaseBean，String，List，Map
- * 修订历史：
- * ================================================
+ * Created by PC on 2017/12/22.
  */
 public abstract class JsonCallback<T> extends AbsCallback<HTTPResponse<T>> {
 
+    public static final int SUCCESS = 1;
+    public static final int ERROR = -1;
     private LifecycleProvider mProvider;
 
     public JsonCallback(LifecycleProvider mProvider) {
@@ -74,72 +70,98 @@ public abstract class JsonCallback<T> extends AbsCallback<HTTPResponse<T>> {
         // 获取字符串并转码
         String s = unicodeToString(new StringConvert().convertResponse(response));
 
-        HTTPResponse<T>  HTTPResponse= JSON.parseObject(s, new TypeReference<HTTPResponse<T>>() {
+        HTTPResponse<T> HTTPResponse = JSON.parseObject(s, new TypeReference<HTTPResponse<T>>() {
         });
 
         if (mProvider instanceof RxAppCompatActivity) {
             Flowable.just(HTTPResponse)
-                    .compose(((RxAppCompatActivity)mProvider).bindToLifecycle())
+                    .compose(((RxAppCompatActivity) mProvider).bindToLifecycle())
                     .compose(RxUtils.rxSwitch())
                     .subscribe(r -> {
                                 if (r.getCode() == 1) {
                                     onSuccess(r.getData(), r.getMessage());
-                                }else if(r.getCode() == -1){
+                                } else if (r.getCode() == -1) {
                                     onError(new Throwable(r.getMessage()));
-                                }else{
+                                } else {
                                     onFailure(new Throwable(r.getMessage()));
                                 }
                             }
                     );
-        }else if (mProvider instanceof RxFragment) {
+        } else if (mProvider instanceof RxFragment) {
             Flowable.just(HTTPResponse)
-                    .compose(((RxFragment)mProvider).bindToLifecycle())
+                    .compose(((RxFragment) mProvider).bindToLifecycle())
                     .compose(RxUtils.rxSwitch())
                     .subscribe(r -> {
                                 if (r.getCode() == 1) {
                                     onSuccess(r.getData(), r.getMessage());
-                                }else if(r.getCode() == -1){
+                                } else if (r.getCode() == -1) {
                                     onError(new Throwable(r.getMessage()));
-                                }else{
+                                } else {
                                     onFailure(new Throwable(r.getMessage()));
                                 }
                             }
                     );
-        }else  if (mProvider instanceof RxAppCompatDialogFragment) {
+        } else if (mProvider instanceof RxAppCompatDialogFragment) {
             Flowable.just(HTTPResponse)
-                    .compose(((RxAppCompatDialogFragment)mProvider).bindToLifecycle())
+                    .compose(((RxAppCompatDialogFragment) mProvider).bindToLifecycle())
                     .compose(RxUtils.rxSwitch())
                     .subscribe(r -> {
-                                if (r.getCode() == 1) {
+                                if (r.getCode() == SUCCESS) {
                                     onSuccess(r.getData(), r.getMessage());
-                                }else if(r.getCode() == -1){
+                                } else if (r.getCode() == ERROR) {
                                     onError(new Throwable(r.getMessage()));
-                                }else{
+                                } else {
                                     onFailure(new Throwable(r.getMessage()));
                                 }
                             }
                     );
-        }else {
-            
-            
+        } else {
+
+
         }
-       
+
 
         return HTTPResponse;
     }
 
-    protected abstract void onSuccess(T data, String message);
+    @Override
+    public void onSuccess(com.lzy.okgo.model.Response<HTTPResponse<T>> response) {
 
-    protected  void onError(Throwable throwable){
+    }
 
-        me.leon.libs.utils.T.getInstance().show("Error", me.leon.libs.utils.T.ERR);
+    protected void onSuccess(T data, String message) {
+        onSuccess(data);
+    }
 
-        
-    };
+    /**
+     * 请求成功封装
+     *
+     * @param data
+     */
+    protected abstract void onSuccess(T data);
 
-    protected  void onFailure(Throwable throwable){
-        me.leon.libs.utils.T.getInstance().show("Fail", me.leon.libs.utils.T.ERR);
-    };
+    /**
+     * 网络请求错误
+     *
+     * @param response
+     */
+    @Override
+    public void onError(com.lzy.okgo.model.Response<HTTPResponse<T>> response) {
+        super.onError(response);
+        onFailure(new Throwable("请检查您的网络连接"));
+    }
+
+    protected void onError(Throwable throwable) {
+
+        // TODO: 2018/1/6 0006 错误处理
+
+
+    }
+
+    ;
+
+    protected abstract void onFailure(Throwable throwable);
+
 
     /**
      * Unicode 转字符串
@@ -151,7 +173,7 @@ public abstract class JsonCallback<T> extends AbsCallback<HTTPResponse<T>> {
         Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
         Matcher matcher = pattern.matcher(str);
         char ch;
-        while (matcher.find() ) {
+        while (matcher.find()) {
             ch = (char) Integer.parseInt(matcher.group(2), 16);
             str = str.replace(matcher.group(1), ch + "");
         }

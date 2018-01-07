@@ -12,9 +12,4 @@ public interface IView {
      * @param e 错误
      */
     void onError(Throwable e);
-    /**
-     * 连接失败
-     * @param e 失败
-     */
-    void onFail(Throwable e);
 }

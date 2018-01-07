@@ -24,10 +24,12 @@ import cn.jpush.android.api.JPushInterface;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import me.leon.devsuit.android.CrashUtils;
+import me.leon.devsuit.android.KeyboardUtils;
 import me.leon.devsuit.android.Utils;
 import me.leon.libs.engine.http.LoggerInterceptor;
 import me.leon.libs.engine.image.GlideImageDownloader;
 import me.leon.libs.utils.T;
+import me.leon.quickdev.utils.LocationUtils;
 import okhttp3.OkHttpClient;
 //import me.leon.libs.utils.T;
 
@@ -141,6 +143,8 @@ public class App extends Application {
         //极光推送
         JPushInterface.setDebugMode(BuildConfig.DEBUG);
         JPushInterface.init(this);
+
+        LocationUtils.init(this);
     }
 
     /**
@@ -151,15 +155,18 @@ public class App extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityCreated");
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityCreated");
                 //这里全局给Activity设置toolbar和title,你想象力有多丰富,这里就有多强大,以前放到BaseActivity的操作都可以放到这里
 
             }
 
             @Override
             public void onActivityStarted(Activity activity) {
-
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityStarted");
+                //点击空白处隐藏键盘
+                activity.findViewById(android.R.id.content).setOnClickListener(v -> KeyboardUtils.hideSoftInput(activity));
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityStarted");
             }
 
             @Override
@@ -172,28 +179,33 @@ public class App extends Application {
                         activity.onBackPressed();
                     });
                 }
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityResumed");
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityResumed");
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityPaused");
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityPaused");
             }
 
             @Override
             public void onActivityStopped(Activity activity) {
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityStopped");
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityStopped");
             }
 
             @Override
             public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivitySaveInstanceState");
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivitySaveInstanceState");
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
 
-                Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityDestroyed");
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, activity.getClass().getSimpleName() + "   onActivityDestroyed");
             }
         });
     }

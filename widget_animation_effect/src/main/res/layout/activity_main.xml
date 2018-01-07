@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
@@ -13,11 +12,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+    <ll.leon.com.widget_animation_effect.widget.RollTextView
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:text="ddd33dddddddddddddddddddddddddddddddddddddddddddddddfd343243"
+        android:textColor="#f00"
+        android:textSize="18sp" />
     <TextView
+        android:layout_marginTop="64dp"
         android:id="@+id/container"
         android:background="#0f0"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_margin="16dp"
+        android:text="touch and move me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <ll.leon.com.widget_animation_effect.effect.bubble.HeartLayout
 
@@ -28,4 +39,4 @@
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
-</LinearLayout>
+</RelativeLayout>
