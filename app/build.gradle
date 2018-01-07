@@ -10,6 +10,7 @@ android {
         targetSdkVersion targetVer
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
@@ -105,21 +106,23 @@ android {
 
 
 dependencies {
-
     implementation project(':baselibs')
-//    annotationProcessor knifeAPT //不能写在base库中
+    //    annotationProcessor knifeAPT //不能写在base库中
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    kapt knifeAPT //不能写在base库中
+    kapt knifeAPT
+    //不能写在base库中
     releaseImplementation leakcanary.release
     debugImplementation leakcanary.debug
     implementation jpush.core
     implementation jpush.push
     implementation photoView
     implementation rx.permission
-//    implementation aMap.map3d
+    //    implementation aMap.map3d
     implementation 'com.amap.api:location:3.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer"
     testImplementation 'junit:junit:4.12'
+    implementation files('src/main/libs/alipay.jar')
+    ////implementation files('libs/alipaySdk-20170725.jar')
 }
 
 apply plugin: 'kotlin-android'

@@ -12,6 +12,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import me.leon.libs.Config;
+import me.leon.quickdev.PayManager;
 
 /**
  * Author:  Leon
@@ -43,7 +44,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp) {
-//        PayManager.getInstance().onResp(baseResp);
+        PayManager.getInstance().onResp(baseResp);
         finish();
     }
 }
