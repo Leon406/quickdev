@@ -4,10 +4,10 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.request.PostRequest;
 
-
 import java.util.List;
 
 import io.reactivex.Observable;
+import me.leon.devsuit.android.SPUtils;
 import me.leon.libs.Config;
 import me.leon.libs.utils.M;
 
@@ -172,7 +172,6 @@ public class API {
     public static final String DYNAMICLIST = "dynamic/dynamiclist";
 
 
-
     /**
      * 编辑用户资料
      * <p>
@@ -286,18 +285,21 @@ public class API {
      *
      * @return 请求参数
      */
-//    public static HttpParams getUserParams() {
-//        User user = App.realm.where(User.class).findFirst();
-//        HttpParams params = new HttpParams();
-//        if (user != null) {
-//            params.put("uid", user.getId());
-//            params.put("token", user.getToken());
-//        }
-//        return params;
-//    }
+    public static HttpParams getUserParams() {
+
+        HttpParams params = new HttpParams();
+        int uid = SPUtils.getInstance("user").getInt("uid");
+        String token = SPUtils.getInstance("user").getString("token");
+
+        params.put("uid", uid);
+        params.put("token", token);
+
+        return params;
+    }
 
     /**
      * 创建请求参数  排序加盐后生成md5值
+     *
      * @param params 原始参数
      * @param values 已排序值
      */

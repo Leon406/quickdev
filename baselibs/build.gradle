@@ -44,15 +44,14 @@ repositories {
 }
 dependencies {
     //本地库及aar
-    api fileTree(dir: 'libs', include: ['*.jar'])
-
+    api fileTree(include: ['*.jar'], dir: 'libs')
     api 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile testDp.junit
     //   support lib
     api sup.appCompat
     api sup.recyclerView
-//    compile sup.design
-//    compile sup.cardView
+    //    compile sup.design
+    //    compile sup.cardView
     //网络
     api 'com.lzy.net:okgo:3.0.4'
     api 'com.alibaba:fastjson:1.1.67.android'
@@ -66,22 +65,21 @@ dependencies {
     api rx.life
     api rx.lifeAndroid
     api rx.lifeCmp
-
     //IOC
     api knife
     api 'me.leon406:devsuit:1.0.2'
     //widget
-
     api recyclerAdapter
     // 三方SDK
     api umeng
-
-    api 'me.leon406:bililibrary:1.0'//分享
+    api 'me.leon406:bililibrary:1.0'
+    //分享
     //test
     testCompile testDp.junit
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    api files('src/main/libs/alipay.jar')
 }
 
 

@@ -1,0 +1,130 @@
+apply plugin: 'com.android.application'
+apply plugin: kotlinPlug
+
+android {
+    compileSdkVersion targetVer
+    buildToolsVersion buildToolsVer
+    defaultConfig {
+        applicationId "com.parorisim.loveu"
+        minSdkVersion minVer
+        targetSdkVersion targetVer
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a' //, 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        vectorDrawables.useSupportLibrary = true
+//        multiDexEnabled true
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "b95be6a928154da14de35764", // 极光key
+                JPUSH_CHANNEL: "default", //暂时填写默认值即可.
+                UMENG_APPKEY : "5a3cb44cf29d985cb7000211", //  umeng key
+                AMap         : "3d415ef287bdcd5fc13012a327e086bd" //  高德 key
+        ]
+    }
+    signingConfigs {
+        Sign {
+            keyAlias alias
+            keyPassword pwd
+            storeFile file('../keystore.jks')
+            storePassword pwd
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        official {
+//            resValue "string", "app_name", "LoveU"
+            manifestPlaceholders = [
+                    UMENG_CHANNEL: 'OFFICIAL',
+                    JPUSH_CHANNEL: 'OFFICIAL']
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.Sign
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.Sign
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        //是否支持大工程模式
+        jumboMode = true
+        //预编译
+        preDexLibraries = true
+        //线程数
+        threadCount = 8
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+
+    flavorDimensions "default"
+    productFlavors {
+        official {
+//            resValue "string", "app_name", "LoveU"
+            manifestPlaceholders = [
+                    UMENG_CHANNEL: 'OFFICIAL',
+                    JPUSH_CHANNEL: 'OFFICIAL']
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '26.0.2'
+                }
+            }
+        }
+    }
+}
+
+
+
+
+dependencies {
+    implementation project(':baselibs')
+    //    annotationProcessor knifeAPT //不能写在base库中
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    kapt knifeAPT
+    //不能写在base库中
+    releaseImplementation leakcanary.release
+    debugImplementation leakcanary.debug
+    implementation jpush.core
+    implementation jpush.push
+    implementation photoView
+    implementation rx.permission
+    //    implementation aMap.map3d
+    implementation 'com.amap.api:location:3.4.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer"
+    testImplementation 'junit:junit:4.12'
+
+    //implementation files('libs/alipaySdk-20170725.jar')
+   // implementation files('src/main/java/libs/alipay.jar')
+}
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

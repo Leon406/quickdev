@@ -20,7 +20,7 @@
 bin/
 gen/
 out/
-
+testpay/
 # Gradle files
 .gradle/
 .idea/

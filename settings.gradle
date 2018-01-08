@@ -1,1 +1,1 @@
-include ':app', ':baselibs', ':widget_animation_effect'
+include ':app', ':baselibs', ':widget_animation_effect', ':testpay'
