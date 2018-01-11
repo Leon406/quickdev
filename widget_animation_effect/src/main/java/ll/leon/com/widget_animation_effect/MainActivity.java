@@ -5,6 +5,8 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private float titleHeight;
     private Rect rectangle;
     private int statusBarHeight1;
+    private RecyclerView rv;
+    private AbsAdapter adapter;
 
 
     @Override
@@ -42,6 +48,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         View content = findViewById(android.R.id.content);
+        rv = findViewById(R.id.rv);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+
+        List<String> data = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            data.add("test Data :"+i);
+        }
+       // adapter = new TestAdapter( data, android.R.layout.simple_list_item_1);
+        adapter =new AbsAdapter<String>(data, android.R.layout.simple_list_item_1){
+            @Override
+            protected void convert(BaseHolderHelper holder, String data, int position) {
+                holder.setText(android.R.id.text1,data);
+            }
+        };
+
+        List<String> data2 = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            data2.add("test Data2 :"+i);
+        }
+        rv.setAdapter(adapter);
+        adapter.addData(data2);
+
         statusBarHeight1 = -1;
 //获取status_bar_height资源的ID
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");

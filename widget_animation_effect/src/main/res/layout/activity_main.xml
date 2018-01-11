@@ -12,6 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/ripple"
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <ll.leon.com.widget_animation_effect.widget.RollTextView
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"

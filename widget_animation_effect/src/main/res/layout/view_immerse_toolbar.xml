@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lay_transroot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/v_statusbar"
+        android:layout_width="match_parent"
+        android:layout_height="1.0dp" />
+
+    <FrameLayout
+        android:id="@+id/fl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+</LinearLayout>
