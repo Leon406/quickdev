@@ -1,4 +1,4 @@
-package ll.leon.com.widget_animation_effect;
+package ll.leon.com.widget_animation_effect.helper;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;

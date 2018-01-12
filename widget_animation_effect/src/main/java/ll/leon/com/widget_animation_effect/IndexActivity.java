@@ -13,6 +13,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ll.leon.com.widget_animation_effect.helper.StatusBarHelper;
 import ll.leon.com.widget_animation_effect.immerse.IMActivity;
 import ll.leon.com.widget_animation_effect.widget.ImmerseToolBar;
 import ll.leon.com.widget_animation_effect.widget.SimpleToolbar;
@@ -81,6 +82,7 @@ public class IndexActivity extends AppCompatActivity {
                 clazz = IMActivity.class;
                 break;
             case R.id.bt3:
+                clazz = DialogTestActivity.class;
                 break;
             case R.id.bt4:
                 break;

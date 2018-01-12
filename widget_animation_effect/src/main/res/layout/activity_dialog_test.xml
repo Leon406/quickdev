@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DialogTestActivity">
+
+    <Button
+        android:id="@+id/dialog_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式1" />
+
+    <Button
+        android:id="@+id/dialog_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式2" />
+
+    <Button
+        android:id="@+id/dialog_3"
+        android:layout_gravity="end"
+        android:layout_marginLeft="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="样式3" />
+
+    <Button
+        android:id="@+id/dialog_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式4" />
+
+    <Button
+        android:id="@+id/dialog_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式5" />
+
+    <Button
+        android:id="@+id/dialog_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式6" />
+
+    <Button
+        android:id="@+id/dialog_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式7" />
+
+</LinearLayout>

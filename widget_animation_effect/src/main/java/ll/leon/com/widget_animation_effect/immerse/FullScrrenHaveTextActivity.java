@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import ll.leon.com.widget_animation_effect.R;
-import ll.leon.com.widget_animation_effect.StatusBarHelper;
+import ll.leon.com.widget_animation_effect.helper.StatusBarHelper;
 
 
 public class FullScrrenHaveTextActivity extends AppCompatActivity {

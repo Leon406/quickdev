@@ -25,6 +25,8 @@ import ll.leon.com.widget_animation_effect.animation.ViewMoveHelper;
 import ll.leon.com.widget_animation_effect.effect.bubble.HeartLayout;
 import ll.leon.com.widget_animation_effect.effect.explosion.ExplosionField;
 import ll.leon.com.widget_animation_effect.effect.loading.ErrorCallback;
+import ll.leon.com.widget_animation_effect.helper.AbsAdapter;
+import ll.leon.com.widget_animation_effect.helper.BaseHolderHelper;
 import ll.leon.com.widget_animation_effect.widget.RippleView;
 
 public class MainActivity extends AppCompatActivity {

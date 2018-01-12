@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import ll.leon.com.widget_animation_effect.R;
-import ll.leon.com.widget_animation_effect.StatusBarHelper;
+import ll.leon.com.widget_animation_effect.helper.StatusBarHelper;
 
 
 public class ToolBarAndStatusBarSameColorActivity extends AppCompatActivity {

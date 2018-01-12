@@ -1,4 +1,4 @@
-package ll.leon.com.widget_animation_effect;
+package ll.leon.com.widget_animation_effect.helper;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import ll.leon.com.widget_animation_effect.BuildConfig;
 
 /**
  * @author Leon
