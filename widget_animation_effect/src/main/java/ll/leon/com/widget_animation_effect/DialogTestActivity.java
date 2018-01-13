@@ -35,7 +35,7 @@ public class DialogTestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.dialog_1, R.id.dialog_2, R.id.dialog_3, R.id.dialog_5, R.id.dialog_6, R.id.dialog_7})
+    @OnClick({R.id.dialog_1, R.id.dialog_2, R.id.dialog_3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.dialog_1:
@@ -83,12 +83,7 @@ public class DialogTestActivity extends AppCompatActivity {
 
                 bubbleDialog.show();
                 break;
-            case R.id.dialog_5:
-                break;
-            case R.id.dialog_6:
-                break;
-            case R.id.dialog_7:
-                break;
+
         }
     }
 }

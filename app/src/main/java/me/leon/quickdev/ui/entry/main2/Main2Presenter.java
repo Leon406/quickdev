@@ -39,7 +39,7 @@ public class Main2Presenter extends BasePresenter<Main2Contract.View> implements
 
                         getView().onFetchSuccess(results);
 
-                    });
+                    },throwable -> getView().onError(throwable) );
         } catch (Exception e) {
             getView().onError(e);
             e.printStackTrace();

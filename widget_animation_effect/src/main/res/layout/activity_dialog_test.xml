@@ -26,28 +26,6 @@
         android:layout_height="wrap_content"
         android:text="样式3" />
 
-    <Button
-        android:id="@+id/dialog_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="样式4" />
 
-    <Button
-        android:id="@+id/dialog_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="样式5" />
-
-    <Button
-        android:id="@+id/dialog_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="样式6" />
-
-    <Button
-        android:id="@+id/dialog_7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="样式7" />
 
 </LinearLayout>

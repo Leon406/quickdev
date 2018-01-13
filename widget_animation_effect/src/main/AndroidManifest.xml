@@ -30,7 +30,8 @@
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2" />
-        <activity android:name=".DialogTestActivity"/>
+        <activity android:name=".DialogTestActivity" />
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

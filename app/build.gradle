@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: kotlinPlug
 
+Properties properties = new Properties()
+properties.load(rootProject.file('local.properties').newDataInputStream())
 android {
     compileSdkVersion targetVer
     buildToolsVersion buildToolsVer
@@ -32,9 +34,9 @@ android {
     signingConfigs {
         Sign {
             keyAlias alias
-            keyPassword pwd
+            keyPassword properties.getProperty('pwd')
             storeFile file('../keystore.jks')
-            storePassword pwd
+            storePassword properties.getProperty('pwd')
         }
     }
     flavorDimensions "default"
@@ -121,9 +123,13 @@ dependencies {
     implementation 'com.amap.api:location:3.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer"
     testImplementation 'junit:junit:4.12'
-    implementation files('src/main/libs/alipay.jar')
+
     ////implementation files('libs/alipaySdk-20170725.jar')
 }
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+String getProperties(String key) {
+
+    return properties.getProperty(key)
+}

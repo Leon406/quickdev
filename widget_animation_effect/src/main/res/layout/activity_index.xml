@@ -30,6 +30,7 @@
 
     <Button
         android:id="@+id/bt4"
+        android:text="JS Native 互相调用"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

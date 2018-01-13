@@ -85,6 +85,7 @@ public class IndexActivity extends AppCompatActivity {
                 clazz = DialogTestActivity.class;
                 break;
             case R.id.bt4:
+                clazz = WebActivity.class;
                 break;
             case R.id.bt5:
                 break;
