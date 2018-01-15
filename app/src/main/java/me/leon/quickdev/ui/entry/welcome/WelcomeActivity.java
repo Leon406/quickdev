@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.leon.devsuit.android.SPUtils;
 import me.leon.libs.base.BaseActivity;
 import me.leon.libs.base.BasePresenter;
-
 import me.leon.quickdev.R;
 import me.leon.quickdev.ui.entry.main.MainActivity;
 import me.leon.quickdev.widget.CircleIndicator;
@@ -77,7 +74,7 @@ public class WelcomeActivity extends BaseActivity {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public View instantiateItem(ViewGroup container, int position) {
             View guide = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_guide, container, false);
             ButterKnife.bind(this, guide);
             tvTitle.setText(titles[position]);

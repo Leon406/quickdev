@@ -88,8 +88,10 @@ public class IndexActivity extends AppCompatActivity {
                 clazz = WebActivity.class;
                 break;
             case R.id.bt5:
+                clazz = PictureActivity.class;
                 break;
             case R.id.bt6:
+                clazz = AnimationActivity.class;
                 break;
             case R.id.bt7:
                 break;

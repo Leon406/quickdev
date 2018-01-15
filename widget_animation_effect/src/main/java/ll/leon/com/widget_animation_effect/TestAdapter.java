@@ -2,8 +2,8 @@ package ll.leon.com.widget_animation_effect;
 
 import java.util.List;
 
-import ll.leon.com.widget_animation_effect.helper.AbsAdapter;
-import ll.leon.com.widget_animation_effect.helper.BaseHolderHelper;
+import ll.leon.com.widget_animation_effect.helper.recyclerview.AbsAdapter;
+import ll.leon.com.widget_animation_effect.helper.recyclerview.BaseHolderHelper;
 
 public class TestAdapter extends AbsAdapter<String> {
     public TestAdapter(List<String> data, int resId) {

@@ -1,4 +1,4 @@
-package ll.leon.com.widget_animation_effect.helper;
+package ll.leon.com.widget_animation_effect.helper.recyclerview;
 
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;

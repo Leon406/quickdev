@@ -31,7 +31,10 @@
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2" />
         <activity android:name=".DialogTestActivity" />
-        <activity android:name=".WebActivity"></activity>
+        <activity android:name=".WebActivity" />
+        <activity android:name=".PictureActivity" />
+        <activity android:name=".AnimationActivity" android:theme="@style/AppTheme.Main" />
+        <activity android:name=".ShareActivity" android:theme="@style/AppTheme.Detail"/>
     </application>
 
 </manifest>

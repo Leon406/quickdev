@@ -2,6 +2,7 @@ package me.leon.quickdev.ui.entry.main2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
+import me.leon.libs.Config;
 import me.leon.libs.base.RightSwipeBaseActivity;
 import me.leon.quickdev.R;
 import me.leon.quickdev.bean.Meizi;
@@ -18,7 +20,6 @@ import me.leon.quickdev.ui.entry.gallery.GalleryActivity;
 
 /**
  * Created by PC on 2017/12/22.
-
  */
 
 public class Main2Activity extends RightSwipeBaseActivity<Main2Contract.View, Main2Presenter> implements Main2Contract.View {
@@ -61,8 +62,17 @@ public class Main2Activity extends RightSwipeBaseActivity<Main2Contract.View, Ma
                 Flowable.fromIterable(((MeiZiAdapter) adapter).getData())
                         .map(o -> o.url)
                         .toList()
-                        .subscribe(urls ->
-                                GalleryActivity.start(this, pos, ((ArrayList<String>) urls)))
+                        .subscribe(urls -> {
+                            ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "share");
+
+                            Intent intent = new Intent(this, GalleryActivity.class);
+
+                            intent.putExtra(Config.BUNDLE_POSITION, pos);
+                            intent.putExtra(Config.BUNDLE_DATA, ((ArrayList<String>) urls));
+                            startActivity(intent,transitionActivityOptions.toBundle());
+                            overridePendingTransition(0,0);
+                           // GalleryActivity.start(this, pos, ((ArrayList<String>) urls));
+                        })
         );
 
         handleTouchEventConflict(rv);

@@ -10,7 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
@@ -25,8 +27,9 @@ import ll.leon.com.widget_animation_effect.animation.ViewMoveHelper;
 import ll.leon.com.widget_animation_effect.effect.bubble.HeartLayout;
 import ll.leon.com.widget_animation_effect.effect.explosion.ExplosionField;
 import ll.leon.com.widget_animation_effect.effect.loading.ErrorCallback;
-import ll.leon.com.widget_animation_effect.helper.AbsAdapter;
-import ll.leon.com.widget_animation_effect.helper.BaseHolderHelper;
+import ll.leon.com.widget_animation_effect.helper.CodeUtils;
+import ll.leon.com.widget_animation_effect.helper.recyclerview.AbsAdapter;
+import ll.leon.com.widget_animation_effect.helper.recyclerview.BaseHolderHelper;
 import ll.leon.com.widget_animation_effect.widget.RippleView;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private int statusBarHeight1;
     private RecyclerView rv;
     private AbsAdapter adapter;
+    private CodeUtils instance;
 
 
     @Override
@@ -50,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         View content = findViewById(android.R.id.content);
+        ImageView image = findViewById(R.id.image);
+        refreshCode(image);
+        image.setOnClickListener(v->refreshCode(image));
         rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -96,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
         }).start();
 
         ViewMoveHelper.moveView(rippleView,statusBarHeight1);
+    }
+
+    private void refreshCode(ImageView image) {
+        instance = CodeUtils.getInstance();
+        image.setImageBitmap(instance.createBitmap());
+        Toast.makeText(this, instance.getCode(), Toast.LENGTH_SHORT).show();
     }
 
     private void show() {

@@ -36,16 +36,26 @@
 
     <Button
         android:id="@+id/bt5"
+        android:text="图片选择器"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/bt6"
+        android:text="动画"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/bt7"
+        android:text="Viewpager Tab NavigationBar"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/bt8"
+        android:text="SearchBar"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
