@@ -1,6 +1,7 @@
 package me.leon.libs.base;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
+
 import java.lang.ref.WeakReference;
 
 /**

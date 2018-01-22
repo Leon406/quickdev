@@ -1,6 +1,5 @@
 package me.leon.libs.base;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -9,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.umeng.analytics.MobclickAgent;

@@ -1,5 +1,3 @@
-import static org.gradle.api.Project.*
-
 ext {
 //---------------------------------------- keystore & IDE -----------------------------------------
     buildToolsVer = '27.0.1'

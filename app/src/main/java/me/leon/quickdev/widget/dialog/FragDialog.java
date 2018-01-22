@@ -1,19 +1,13 @@
 package me.leon.quickdev.widget.dialog;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatDialogFragment;
 
-import me.leon.devsuit.android.ScreenUtils;
 import me.leon.quickdev.R;
 
 /**

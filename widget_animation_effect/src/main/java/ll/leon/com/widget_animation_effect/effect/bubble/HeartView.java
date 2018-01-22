@@ -24,7 +24,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import ll.leon.com.widget_animation_effect.R;
 

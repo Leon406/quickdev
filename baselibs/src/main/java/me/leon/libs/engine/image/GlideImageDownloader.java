@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 
 import com.bilibili.socialize.share.core.error.ShareException;
 import com.bilibili.socialize.share.download.IImageDownloader;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 

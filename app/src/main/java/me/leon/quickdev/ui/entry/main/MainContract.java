@@ -1,5 +1,6 @@
 package me.leon.quickdev.ui.entry.main;
 
+import java.io.File;
 import java.util.List;
 
 import me.leon.libs.base.IPresenter;
@@ -19,5 +20,8 @@ class MainContract {
 
     interface Presenter extends IPresenter<View> {
         void doFetch();
+
+        void doDownload(String path);
+        void doUpload(List<File> files);
     }
 }

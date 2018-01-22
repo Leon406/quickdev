@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +24,7 @@ import me.leon.quickdev.R;
 import me.leon.quickdev.bean.SimpleUser;
 import me.leon.quickdev.ui.entry.main2.Main2Activity;
 import me.leon.quickdev.utils.LocationUtils;
+import me.leon.quickdev.utils.Picker;
 //import me.leon.libs.utils.AnimateToast;
 //import me.leon.libs.utils.RxUtils;
 //import me.leon.libs.utils.T;
@@ -31,6 +33,10 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
 
     @BindView(R.id.tv)
     TextView tv;
+    @BindView(R.id.down)
+    TextView down;
+    @BindView(R.id.upload)
+    TextView upload;
     private RxPermissions rxPermissions;
 
     public static void start(Context context) {
@@ -67,7 +73,7 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
         getPresenter().doFetchList();
 
 
-        RxView.clicks(tv)
+        RxView.clicks(down)
                 .compose(rxPermissions.ensure(Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 .subscribe(granted -> {
@@ -83,17 +89,37 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
                     }
                 });
 
+        RxView.clicks(down)
+//                .subscribe(v -> getPresenter().doDownload(""));
+                .subscribe(v -> getPresenter().doLogin("13957839096","a406123"));
+
+        RxView.clicks(upload)
+                .compose(rxPermissions.ensure(Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                .subscribe(granted -> {
+                    if (granted) {
+                        Picker.openDynamicGallery(this, null)
+                                .toFlowable()
+                                .flatMap(Flowable::fromIterable)
+                                .map(localMedia -> new File(localMedia.getCompressPath()))
+                                .toList()
+                                .subscribe(lists -> getPresenter().doUpload(lists));
+                    } else {
+
+                    }
+
+                });
 
     }
 
-    private void showLocation() {
-        LocationUtils.getLocation(location -> {
+        private void showLocation () {
+            LocationUtils.getLocation(location -> {
 
-            if (BuildConfig.DEBUG) Log.d("MainActivity", location.getAddress());
-        });
-    }
+                if (BuildConfig.DEBUG) Log.d("MainActivity", location.getAddress());
+            });
+        }
 
-    private void share() {
+        private void share () {
 //        View decorView = getWindow().getDecorView();
 //        int option = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
 //        decorView.setSystemUiVisibility(option);
@@ -108,29 +134,29 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
 //        param.setThumb(new ShareImage(R.drawable.share_wechat));
 //
 //        ShareDialog.getNewInstance(param).show(getSupportFragmentManager(),null);
-    }
+        }
 
-    // @OnClick(R.id.tv)
-    public void onViewClicked() {
+        // @OnClick(R.id.tv)
+        public void onViewClicked () {
 //        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
 //        T.getInstance().show("emmit success",T.ERR);
 //            Flowable.timer(2,TimeUnit.SECONDS).compose(RxUtils.rxSwitch()).subscribe(l->AnimateToast.hide());
-        Main2Activity.start(this);
+            Main2Activity.start(this);
 
+        }
+
+        @Override
+        public void onError (Throwable e){
+            T.getInstance().show(e.getMessage(), T.ERR);
+        }
+
+
+        @Override
+        public void onFetchSuccess (List < SimpleUser > user) {
+
+            Flowable.fromIterable(user)
+                    .compose(RxUtils.rxSwitch())
+                    .subscribe(usr -> Log.d("MainActivity", usr.getNickName()));
+
+        }
     }
-
-    @Override
-    public void onError(Throwable e) {
-        T.getInstance().show(e.getMessage(), T.ERR);
-    }
-
-
-    @Override
-    public void onFetchSuccess(List<SimpleUser> user) {
-
-        Flowable.fromIterable(user)
-                .compose(RxUtils.rxSwitch())
-                .subscribe(usr -> Log.d("MainActivity", usr.getNickName()));
-
-    }
-}

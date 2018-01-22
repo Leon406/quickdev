@@ -14,7 +14,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        multiDexKeepFile file ('multidex.keep')
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -70,10 +70,11 @@ android {
 
     dexOptions {
         javaMaxHeapSize "4g"
+        preDexLibraries = false
         //是否支持大工程模式
         jumboMode = true
         //预编译
-        preDexLibraries = true
+       // preDexLibraries = true
         //线程数
         threadCount = 8
     }
@@ -119,12 +120,16 @@ dependencies {
     implementation jpush.push
     implementation photoView
     implementation rx.permission
+    implementation 'me.leon406:devsuit:1.0.2'
+    implementation 'com.lzy.net:okrx2:2.0.2'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'me.leon406:picture_library:1.2.4'
+
     //    implementation aMap.map3d
     implementation 'com.amap.api:location:3.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer"
     testImplementation 'junit:junit:4.12'
 
-    ////implementation files('libs/alipaySdk-20170725.jar')
 }
 
 apply plugin: 'kotlin-android'
@@ -133,3 +138,25 @@ String getProperties(String key) {
 
     return properties.getProperty(key)
 }
+
+afterEvaluate {
+    tasks.matching{
+        it.name.startsWith('create') && it.name.endsWith('MainDexClassList')
+    }.each { tk ->
+        tk.doLast {
+            keepMainMultiDex(tk.outputFile)
+        }
+    }
+}
+
+/**
+ * 控制MainDex中的class列表
+ * 将multidex.keep的内容追加到 maindexlist.txt 中
+ * @param outputFile
+ */
+def keepMainMultiDex(File outputFile){
+    File keepFile = file("multidex.keep")
+    outputFile << '\n'
+    outputFile << keepFile.getText('UTF-8')
+}
+

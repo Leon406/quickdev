@@ -14,7 +14,6 @@ import com.bilibili.socialize.share.core.SocializeListeners;
 import com.bilibili.socialize.share.core.SocializeMedia;
 import com.bilibili.socialize.share.core.shareparam.BaseShareParam;
 import com.bilibili.socialize.share.util.ShareUtils;
-
 import com.trello.rxlifecycle2.components.support.RxAppCompatDialogFragment;
 
 import me.leon.baselibs.R;

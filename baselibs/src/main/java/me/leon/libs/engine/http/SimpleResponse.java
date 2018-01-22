@@ -1,22 +1,23 @@
 package me.leon.libs.engine.http;
 
+import java.io.Serializable;
+
 /**
- * Author:  Leon
+ * Author:  Parorisim
  * Time:    2017/4/6 下午2:41
  * Desc:    网络请求数据类
  */
 
-public class HTTPResponse<T> {
+public class SimpleResponse implements Serializable {
 
     private int code;
     private String msg;
-    private T info;
 
     public int getCode() {
         return code;
     }
 
-
+    @Deprecated
     public void setCode(int code) {
         this.code = code;
     }
@@ -25,15 +26,16 @@ public class HTTPResponse<T> {
         return msg;
     }
 
-    public T getData() {
-        return info;
-    }
 
+    @Deprecated
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
-    public void setInfo(T info) {
-        this.info = info;
+    public HTTPResponse toHTTPResponse() {
+        HTTPResponse httpResponse = new HTTPResponse();
+        httpResponse.setCode(code);
+        httpResponse.setMsg(msg);
+        return httpResponse;
     }
+
 }

@@ -2,15 +2,12 @@ package me.leon.quickdev;
 
 import android.app.Activity;
 
-
 import com.alipay.sdk.app.PayTask;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-
 
 import io.reactivex.Flowable;
 import me.leon.libs.Config;
