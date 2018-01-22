@@ -17,6 +17,7 @@ import ll.leon.com.widget_animation_effect.helper.StatusBarHelper;
 import ll.leon.com.widget_animation_effect.immerse.IMActivity;
 import ll.leon.com.widget_animation_effect.widget.ImmerseToolBar;
 import ll.leon.com.widget_animation_effect.widget.SimpleToolbar;
+import ll.leon.com.widget_animation_effect.zxing.ZxingTestActivity;
 
 public class IndexActivity extends AppCompatActivity {
 
@@ -34,6 +35,8 @@ public class IndexActivity extends AppCompatActivity {
     Button bt6;
     @BindView(R.id.bt7)
     Button bt7;
+    @BindView(R.id.bt8)
+    Button bt8;
     private Class<?> clazz;
     private ImmerseToolBar toolBar;
 
@@ -72,7 +75,7 @@ public class IndexActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.bt1, R.id.bt2, R.id.bt3, R.id.bt4, R.id.bt5, R.id.bt6, R.id.bt7})
+    @OnClick({R.id.bt1, R.id.bt2, R.id.bt3, R.id.bt4, R.id.bt5, R.id.bt6, R.id.bt7,R.id.bt8,R.id.bt9})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt1:
@@ -94,6 +97,11 @@ public class IndexActivity extends AppCompatActivity {
                 clazz = AnimationActivity.class;
                 break;
             case R.id.bt7:
+                break;
+            case R.id.bt8:
+                break;
+            case R.id.bt9:
+                clazz = ZxingTestActivity.class;
                 break;
         }
 

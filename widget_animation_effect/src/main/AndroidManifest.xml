@@ -21,7 +21,6 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".immerse.IMActivity" />
-        <activity android:name=".ImmerseActivity" />
         <activity android:name=".immerse.ChangeStatusBarColorActivity" />
         <activity android:name=".immerse.FullScrrenHaveTextActivity" />
         <activity android:name=".immerse.FullScrrenNoTextActivity" />
@@ -33,8 +32,13 @@
         <activity android:name=".DialogTestActivity" />
         <activity android:name=".WebActivity" />
         <activity android:name=".PictureActivity" />
-        <activity android:name=".AnimationActivity" android:theme="@style/AppTheme.Main" />
-        <activity android:name=".ShareActivity" android:theme="@style/AppTheme.Detail"/>
+        <activity
+            android:name=".AnimationActivity"
+            android:theme="@style/AppTheme.Main" />
+        <activity
+            android:name=".ShareActivity"
+            android:theme="@style/AppTheme.Detail" />
+        <activity android:name=".zxing.ZxingTestActivity"></activity>
     </application>
 
 </manifest>

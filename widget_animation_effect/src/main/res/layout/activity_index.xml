@@ -1,62 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".IndexActivity">
-    <ll.leon.com.widget_animation_effect.widget.ImmerseToolBar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bt1"
-        android:text="main"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".IndexActivity">
 
-    <Button
-        android:id="@+id/bt2"
-        android:text="状态栏"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <ll.leon.com.widget_animation_effect.widget.ImmerseToolBar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/bt3"
-        android:text="对话框"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="main" />
 
-    <Button
-        android:id="@+id/bt4"
-        android:text="JS Native 互相调用"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="状态栏" />
 
-    <Button
-        android:id="@+id/bt5"
-        android:text="图片选择器"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="对话框" />
 
-    <Button
-        android:id="@+id/bt6"
-        android:text="动画"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JS Native 互相调用" />
 
-    <Button
-        android:id="@+id/bt7"
-        android:text="Viewpager Tab NavigationBar"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/bt8"
-        android:text="SearchBar"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="图片选择器" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/bt6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动画" />
+
+        <Button
+            android:id="@+id/bt7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Viewpager Tab NavigationBar"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bt8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SearchBar"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/bt9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zxing"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
