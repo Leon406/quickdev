@@ -129,6 +129,7 @@ dependencies {
     implementation 'com.amap.api:location:3.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer"
     testImplementation 'junit:junit:4.12'
+    testImplementation 'com.android.support.test:runner:1.0.1'
 
 }
 

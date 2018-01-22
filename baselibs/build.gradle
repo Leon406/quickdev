@@ -76,9 +76,11 @@ dependencies {
     //分享
     //test
     testCompile testDp.junit
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestApi 'com.android.support.test:runner:1.0.1'
+    androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.1'
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
     api files('src/main/libs/alipay.jar')
 }
 
