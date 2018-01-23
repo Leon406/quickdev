@@ -15,6 +15,7 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
     private LifecycleProvider mProvider;
 
     public BasePresenter(LifecycleProvider mProvider) {
+
         this.mProvider = mProvider;
     }
 

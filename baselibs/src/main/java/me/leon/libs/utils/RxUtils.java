@@ -29,6 +29,7 @@ public class RxUtils {
      */
     public static <T> FlowableTransformer<T, T> rxSwitch() {
         return observable -> observable.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
     }
@@ -40,6 +41,7 @@ public class RxUtils {
      */
     public static <T> ObservableTransformer<T, T> observeThreadSwitch() {
         return observable -> observable.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
     }

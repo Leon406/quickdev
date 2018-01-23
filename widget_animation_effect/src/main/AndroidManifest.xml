@@ -38,7 +38,9 @@
         <activity
             android:name=".ShareActivity"
             android:theme="@style/AppTheme.Detail" />
-        <activity android:name=".zxing.ZxingTestActivity"></activity>
+        <activity android:name=".zxing.ZxingTestActivity" />
+        <activity android:name=".FrameworkActivity" />
+        <activity android:name=".dbtest.DBTestActivity"></activity>
     </application>
 
 </manifest>

@@ -1,28 +1,29 @@
 package me.leon.quickdev.ui.entry.main;
 
 import android.support.annotation.NonNull;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import com.lzy.okgo.model.HttpParams;
-import com.lzy.okgo.model.Progress;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import me.leon.baselibs.BuildConfig;
 import me.leon.devsuit.android.SPUtils;
 import me.leon.libs.Config;
 import me.leon.libs.base.BasePresenter;
 import me.leon.libs.engine.http.API;
 import me.leon.libs.utils.M;
+import me.leon.libs.utils.RxUtils;
 import me.leon.quickdev.bean.SimpleUser;
 import me.leon.quickdev.bean.User;
-import me.leon.quickdev.http.OkRx2Manager;
+import me.leon.quickdev.http.okrx.OkRx2Manager;
+import me.leon.quickdev.http.retrofit.ApiService;
+import me.leon.quickdev.http.retrofit.RetrofitManager;
 
 /**
  * Created by PC on 2017/12/23.
@@ -31,16 +32,42 @@ import me.leon.quickdev.http.OkRx2Manager;
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
 
 
+    private ApiService apiService;
+
     public MainPresenter(LifecycleProvider mProvider) {
         super(mProvider);
     }
 
     @Override
     public void doFetch() {
+//        RetrofitManager.getInstance().getApiService().getData()
+//                .compose(RxUtils.observeThreadSwitch())
+//                .flatMap(Observable::fromIterable)
+//                .map(joke->joke.title)
+//                .subscribe(System.out::println,Throwable::printStackTrace);
 
-        OkRx2Manager.postObject(Config.API_HOST + API.PUBLICINFO, new HttpParams(), String.class, getProvider())
-                .subscribe(data -> Log.d("MainPresenter", data)
-                        , getView()::onError);
+//        Map<String, String> map = new ArrayMap<String, String>();
+//        map.put("client_id","zhangsan");
+//        map.put("client_secret","12345@");
+//
+//
+//        RetrofitManager.getInstance().getApiService().getUser(map)
+//                .compose(RxUtils.observeThreadSwitch())
+//                .subscribe(s -> Log.d("getUser info", s.string()));
+        Map<String, String> params = new ArrayMap<>();
+        params.put("username", "zhangsan");
+        params.put("password", "12345@");
+
+
+        RetrofitManager.getInstance().getApiService().login(params)
+                .compose(RxUtils.observeThreadSwitch())
+                .subscribe(s -> Log.d("getUser login", s.string()), throwable -> Log.d("Error Resp", throwable.getMessage()));
+
+
+
+//        OkRx2Manager.postObject(Config.API_HOST + API.PUBLICINFO, new HttpParams(), String.class, getProvider())
+//                .subscribe(data -> Log.d("MainPresenter", data)
+//                        , getView()::onError);
 
 
 //        API.buildRequest(new HttpParams(),API.PUBLICINFO).execute(new StringCallback() {
@@ -56,34 +83,35 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void doDownload(String path) {
-        OkRx2Manager.downloadFile2("http://down11.zol.com.cn/downsjbz/ttpod10.0.7@148_19985.exe", new HttpParams())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Progress>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Progress progress) {
-
-                        if (BuildConfig.DEBUG)
-                            Log.d("MainPresenter", "progress.fraction:" + progress.fraction);
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (BuildConfig.DEBUG)
-                            Log.d("MainPresenter", "onError" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        if (BuildConfig.DEBUG)
-                            Log.d("MainPresenter", "onComplete");
-                    }
-                });
+        doFetch();
+//        OkRx2Manager.downloadFile2("http://down11.zol.com.cn/downsjbz/ttpod10.0.7@148_19985.exe", new HttpParams())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<Progress>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(Progress progress) {
+//
+//                        if (BuildConfig.DEBUG)
+//                            Log.d("MainPresenter", "progress.fraction:" + progress.fraction);
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        if (BuildConfig.DEBUG)
+//                            Log.d("MainPresenter", "onError" + e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        if (BuildConfig.DEBUG)
+//                            Log.d("MainPresenter", "onComplete");
+//                    }
+//                });
     }
 
     @Override

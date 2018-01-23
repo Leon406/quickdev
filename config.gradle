@@ -35,7 +35,7 @@ ext {
     retrofit = [
             core         : buildDepend(retrofitPackage, 'retrofit', retrofitVersion),
             gson         : buildDepend(retrofitPackage, 'converter-gson', retrofitVersion),
-            rxAdapterJava: buildDepend(retrofitPackage, 'adapter-rxjava2', retrofitVersion)
+            rxJava: buildDepend(retrofitPackage, 'adapter-rxjava2', retrofitVersion)
     ]
 
 //---------------------------------------------Rx --------------------------------------------------

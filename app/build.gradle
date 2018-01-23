@@ -124,6 +124,9 @@ dependencies {
     implementation 'com.lzy.net:okrx2:2.0.2'
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'me.leon406:picture_library:1.2.4'
+    implementation retrofit.core
+    implementation retrofit.gson
+    implementation retrofit.rxJava
 
     //    implementation aMap.map3d
     implementation 'com.amap.api:location:3.4.0'

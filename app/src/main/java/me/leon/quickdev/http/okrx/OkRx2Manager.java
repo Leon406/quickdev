@@ -1,4 +1,4 @@
-package me.leon.quickdev.http;
+package me.leon.quickdev.http.okrx;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

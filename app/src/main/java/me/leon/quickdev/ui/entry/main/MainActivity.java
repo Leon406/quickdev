@@ -70,7 +70,7 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
         rxPermissions = new RxPermissions(this);
 
         getPresenter().doFetch();
-        getPresenter().doFetchList();
+//        getPresenter().doFetchList();
 
 
         RxView.clicks(down)
@@ -91,7 +91,10 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
 
         RxView.clicks(down)
 //                .subscribe(v -> getPresenter().doDownload(""));
-                .subscribe(v -> getPresenter().doLogin("13957839096","a406123"));
+                .subscribe(v -> {
+//                    getPresenter().doLogin("13957839096", "a406123");
+                            getPresenter().doDownload("");
+                });
 
         RxView.clicks(upload)
                 .compose(rxPermissions.ensure(Manifest.permission.CAMERA,
@@ -112,14 +115,14 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
 
     }
 
-        private void showLocation () {
-            LocationUtils.getLocation(location -> {
+    private void showLocation() {
+        LocationUtils.getLocation(location -> {
 
-                if (BuildConfig.DEBUG) Log.d("MainActivity", location.getAddress());
-            });
-        }
+            if (BuildConfig.DEBUG) Log.d("MainActivity", location.getAddress());
+        });
+    }
 
-        private void share () {
+    private void share() {
 //        View decorView = getWindow().getDecorView();
 //        int option = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
 //        decorView.setSystemUiVisibility(option);
@@ -134,29 +137,29 @@ public class MainActivity extends RightSwipeBaseActivity<MainContract.View, Main
 //        param.setThumb(new ShareImage(R.drawable.share_wechat));
 //
 //        ShareDialog.getNewInstance(param).show(getSupportFragmentManager(),null);
-        }
+    }
 
-        // @OnClick(R.id.tv)
-        public void onViewClicked () {
+    // @OnClick(R.id.tv)
+    public void onViewClicked() {
 //        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
 //        T.getInstance().show("emmit success",T.ERR);
 //            Flowable.timer(2,TimeUnit.SECONDS).compose(RxUtils.rxSwitch()).subscribe(l->AnimateToast.hide());
-            Main2Activity.start(this);
+        Main2Activity.start(this);
 
-        }
-
-        @Override
-        public void onError (Throwable e){
-            T.getInstance().show(e.getMessage(), T.ERR);
-        }
-
-
-        @Override
-        public void onFetchSuccess (List < SimpleUser > user) {
-
-            Flowable.fromIterable(user)
-                    .compose(RxUtils.rxSwitch())
-                    .subscribe(usr -> Log.d("MainActivity", usr.getNickName()));
-
-        }
     }
+
+    @Override
+    public void onError(Throwable e) {
+        T.getInstance().show(e.getMessage(), T.ERR);
+    }
+
+
+    @Override
+    public void onFetchSuccess(List<SimpleUser> user) {
+
+        Flowable.fromIterable(user)
+                .compose(RxUtils.rxSwitch())
+                .subscribe(usr -> Log.d("MainActivity", usr.getNickName()));
+
+    }
+}

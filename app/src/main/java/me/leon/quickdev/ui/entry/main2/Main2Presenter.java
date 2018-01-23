@@ -5,7 +5,7 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 
 import me.leon.libs.base.BasePresenter;
 import me.leon.quickdev.bean.Meizi;
-import me.leon.quickdev.http.OkRx2Manager;
+import me.leon.quickdev.http.okrx.OkRx2Manager;
 
 /**
  * Created by Leon on 2017/12/23 0023.

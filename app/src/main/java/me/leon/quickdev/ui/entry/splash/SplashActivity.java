@@ -12,8 +12,6 @@ import me.leon.quickdev.R;
 import me.leon.quickdev.ui.entry.main.MainActivity;
 import me.leon.quickdev.ui.entry.welcome.WelcomeActivity;
 
-import static me.leon.libs.utils.RxUtils.timer;
-
 public class SplashActivity extends BaseActivity {
 
 
@@ -37,8 +35,9 @@ public class SplashActivity extends BaseActivity {
 
         btn.setOnClickListener(v -> enter());
 
-        timer( 1, 6,  this)
-                .subscribe(this::enter);
+        enter();
+//        timer( 1, 3,  this)
+//                .subscribe(this::enter);
 
 //        Flowable.interval(1,1, TimeUnit.SECONDS)
 //                .take(6)
@@ -60,6 +59,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void enter(long aLong) {
+
         btn.setText(getString(R.string.hint_time, 3 - aLong));
         if (BuildConfig.DEBUG) Log.d("SplashActivity", "aLong:  " + aLong);
         if (aLong == 2) {

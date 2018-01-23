@@ -49,7 +49,7 @@ public class IndexActivity extends AppCompatActivity {
 
        SimpleToolbar simpleToolbar = ((SimpleToolbar) LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null));
         simpleToolbar.setLeftTitleClickListener(v -> Toast.makeText(this, "Left", Toast.LENGTH_SHORT).show())
-                .setRightTitleClickListener(v -> Toast.makeText(this, "Right", Toast.LENGTH_SHORT).show())
+                .setRightTitleClickListener(v -> FrameworkActivity.start(this))
                 .setMainTitle("ToolBar")
                 .setMainTitleColor(Color.RED)
         ;
