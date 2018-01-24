@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/real"
-            android:text="realm"
+            android:text="mRealm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
@@ -31,6 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <Button
+        android:id="@+id/query"
+        android:text="query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
