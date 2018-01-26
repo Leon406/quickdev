@@ -13,7 +13,7 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexKeepFile file ('multidex.keep')
+        multiDexKeepFile file('multidex.keep')
         vectorDrawables.useSupportLibrary = true
 
     }
@@ -72,6 +72,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.android.support.test:runner:1.0.1'
     // /
+
+    releaseImplementation leakcanary.release
+    debugImplementation leakcanary.debug
     implementation 'org.greenrobot:greendao:3.2.0'
     implementation project(':zxinglib')
     implementation project(':bankcardrecognize')
@@ -84,7 +87,7 @@ greendao {
     //generateTests：设置自动生成单元测试用例
 }
 afterEvaluate {
-    tasks.matching{
+    tasks.matching {
         it.name.startsWith('create') && it.name.endsWith('MainDexClassList')
     }.each { tk ->
         tk.doLast {
@@ -98,9 +101,8 @@ afterEvaluate {
  * 将multidex.keep的内容追加到 maindexlist.txt 中
  * @param outputFile
  */
-def keepMainMultiDex(File outputFile){
+def keepMainMultiDex(File outputFile) {
     File keepFile = file("multidex.keep")
     outputFile << '\n'
     outputFile << keepFile.getText('UTF-8')
 }
-

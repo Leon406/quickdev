@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ll.leon.com.widget_animation_effect">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -43,7 +43,8 @@
             android:theme="@style/AppTheme.Detail" />
         <activity android:name=".zxing.ZxingTestActivity" />
         <activity android:name=".FrameworkActivity" />
-        <activity android:name=".dbtest.DBTestActivity"></activity>
+        <activity android:name=".dbtest.DBTestActivity" />
+        <activity android:name=".UIWidgetActivity"></activity>
     </application>
 
 </manifest>

@@ -12,4 +12,13 @@
         <attr name="bezierFactor" format="integer" />
         <attr name="anim_duration" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="IndicatorView">
+        <attr name="indicatorSelectedSrc" format="color|reference" />
+        <attr name="indicatorUnselectedSrc" format="color|reference" />
+        <attr name="indicatorPadding" format="dimension|reference" />
+        <attr name="indicatorHeight" format="dimension|reference" />
+        <attr name="indicatorWidth" format="dimension|reference" />
+
+    </declare-styleable>
 </resources>

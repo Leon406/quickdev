@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.kingja.loadsir.core.LoadSir;
+import com.squareup.leakcanary.LeakCanary;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -33,6 +34,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         ctx =this;
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return ;
+        }
+
+        LeakCanary.install(this);
         LoadSir.beginBuilder()
                 .addCallback(new ErrorCallback())//'添加各种状态页
                 .addCallback(new EmptyCallback())

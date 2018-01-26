@@ -37,13 +37,8 @@ public class BaseHolderHelper extends RecyclerView.ViewHolder {
         return  this;
     }
 
-    public BaseHolderHelper setOnClickListener(@IdRes int id, boolean visiable) {
-        getView(id).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+    public BaseHolderHelper setOnClickListener(@IdRes int id, View.OnClickListener listener) {
+        getView(id).setOnClickListener(listener);
         return  this;
     }
 }

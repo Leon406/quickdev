@@ -50,6 +50,7 @@ dependencies {
     //   support lib
     api sup.appCompat
     api sup.recyclerView
+    api sup.cardView
     //    compile sup.design
     //    compile sup.cardView
     //网络

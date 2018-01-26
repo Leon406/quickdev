@@ -2,6 +2,7 @@ package ll.leon.com.widget_animation_effect.helper;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
@@ -146,13 +147,25 @@ public class StatusBarHelper {
         systemContent.addView(statusBarView, 0, lp);
     }
 
+
+    /** 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)*/
+    public static void setPaddingSmart(Context context, View view) {
+        if (Build.VERSION.SDK_INT >= 19) {
+            ViewGroup.LayoutParams lp = view.getLayoutParams();
+            if (lp != null && lp.height > 0) {
+                lp.height += getStatusBarHeight(context);//增高
+            }
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
+                    view.getPaddingRight(), view.getPaddingBottom());
+        }
+    }
     /**
      * 获取状态栏高度
      *
      * @param activity
      * @return
      */
-    public static int getStatusBarHeight(Activity activity) {
+    public static int getStatusBarHeight(Context activity) {
         Resources resources = activity.getResources();
         int statusBarHeight = resources.getDimensionPixelSize(resources.getIdentifier("status_bar_height", "dimen", "android"));
         if (BuildConfig.DEBUG) Log.d("StatusBarHelper", "statusBarHeight:" + statusBarHeight);

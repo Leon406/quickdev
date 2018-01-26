@@ -1,1 +1,2 @@
 include ':app', ':baselibs', ':widget_animation_effect', ':testpay',':zxinglib',':bankcardrecognize'
+include':recycler'

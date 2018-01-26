@@ -36,6 +36,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
+
             <Button
                 android:id="@+id/bt_have_tool_bar"
                 android:layout_width="0dp"
@@ -54,12 +55,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
+
             <Button
                 android:id="@+id/bt_have_toolbar_change_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="改字体颜色" />
+
             <Button
                 android:id="@+id/bt_only_banner"
                 android:layout_width="0dp"

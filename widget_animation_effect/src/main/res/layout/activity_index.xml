@@ -11,10 +11,7 @@
         android:orientation="vertical"
         tools:context=".IndexActivity">
 
-        <ll.leon.com.widget_animation_effect.widget.ImmerseToolBar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <include layout="@layout/layout_toolbar" />
 
         <Button
             android:id="@+id/bt1"
@@ -65,6 +62,7 @@
             android:layout_height="wrap_content"
             android:text="SearchBar"
             android:textAllCaps="false" />
+
         <Button
             android:id="@+id/bt9"
             android:layout_width="match_parent"

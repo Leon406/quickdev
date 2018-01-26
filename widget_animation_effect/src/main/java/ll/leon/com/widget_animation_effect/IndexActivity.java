@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -15,7 +14,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ll.leon.com.widget_animation_effect.helper.StatusBarHelper;
 import ll.leon.com.widget_animation_effect.immerse.IMActivity;
-import ll.leon.com.widget_animation_effect.widget.ImmerseToolBar;
 import ll.leon.com.widget_animation_effect.widget.SimpleToolbar;
 import ll.leon.com.widget_animation_effect.zxing.ZxingTestActivity;
 
@@ -38,16 +36,15 @@ public class IndexActivity extends AppCompatActivity {
     @BindView(R.id.bt8)
     Button bt8;
     private Class<?> clazz;
-    private ImmerseToolBar toolBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        toolBar = ((ImmerseToolBar) findViewById(R.id.toolbar));
+        SimpleToolbar  simpleToolbar = ((SimpleToolbar) findViewById(R.id.simple_toolbar));
 
-       SimpleToolbar simpleToolbar = ((SimpleToolbar) LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null));
         simpleToolbar.setLeftTitleClickListener(v -> Toast.makeText(this, "Left", Toast.LENGTH_SHORT).show())
                 .setRightTitleClickListener(v -> FrameworkActivity.start(this))
                 .setMainTitle("ToolBar")
@@ -55,10 +52,8 @@ public class IndexActivity extends AppCompatActivity {
         ;
 
 
-       toolBar
-              //  .setActionBarBackgroud(R.drawable.ic_launcher_background)
-                .setToolbar(simpleToolbar);
-//        StatusBarHelper.setImmerse(this);
+        StatusBarHelper.setImmerse(this);
+//        StatusBarHelper.setPaddingSmart(this,simpleToolbar);
 //        StatusBarHelper.setDarkFontStatusBar(this);
         new Thread() {
             @Override
@@ -97,6 +92,7 @@ public class IndexActivity extends AppCompatActivity {
                 clazz = AnimationActivity.class;
                 break;
             case R.id.bt7:
+                clazz = UIWidgetActivity.class;
                 break;
             case R.id.bt8:
                 break;
