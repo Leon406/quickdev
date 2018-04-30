@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import ll.leon.com.widget_animation_effect.helper.StatusBarHelper;
 import ll.leon.com.widget_animation_effect.immerse.IMActivity;
 import ll.leon.com.widget_animation_effect.widget.SimpleToolbar;
+import ll.leon.com.widget_animation_effect.widget.windows.HomeWindow;
 import ll.leon.com.widget_animation_effect.zxing.ZxingTestActivity;
 
 public class IndexActivity extends AppCompatActivity {
@@ -68,6 +69,8 @@ public class IndexActivity extends AppCompatActivity {
             }
         }.start();
         ButterKnife.bind(this);
+
+        new HomeWindow().show(getApplication());
     }
 
     @OnClick({R.id.bt1, R.id.bt2, R.id.bt3, R.id.bt4, R.id.bt5, R.id.bt6, R.id.bt7,R.id.bt8,R.id.bt9})

@@ -143,15 +143,15 @@ String getProperties(String key) {
     return properties.getProperty(key)
 }
 
-afterEvaluate {
-    tasks.matching{
-        it.name.startsWith('create') && it.name.endsWith('MainDexClassList')
-    }.each { tk ->
-        tk.doLast {
-            keepMainMultiDex(tk.outputFile)
-        }
-    }
-}
+//afterEvaluate {
+//    tasks.matching{
+//        it.name.startsWith('create') && it.name.endsWith('MainDexClassList')
+//    }.each { tk ->
+//        tk.doLast {
+//            keepMainMultiDex(tk.outputFile)
+//        }
+//    }
+//}
 
 /**
  * 控制MainDex中的class列表

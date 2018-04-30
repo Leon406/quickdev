@@ -9,7 +9,7 @@ ext {
 
 
 //----------------------------------------classpath & plugs-----------------------------------------
-    gradleVer = '3.1.0-alpha07'
+    gradleVer = '3.2.0-alpha09'
     gradlePlug = "com.android.tools.build:gradle:$gradleVer"
 
     kotlinVer = '1.2.0'
