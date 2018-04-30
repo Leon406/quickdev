@@ -70,7 +70,12 @@ public class IndexActivity extends AppCompatActivity {
         }.start();
         ButterKnife.bind(this);
 
-        new HomeWindow().show(getApplication());
+        HomeWindow homeWindow = new HomeWindow();
+        homeWindow.setListener(()->{
+            Toast.makeText(this, "HomeWindow clicked", Toast.LENGTH_SHORT).show();
+
+        });
+        homeWindow.show(getApplication());
     }
 
     @OnClick({R.id.bt1, R.id.bt2, R.id.bt3, R.id.bt4, R.id.bt5, R.id.bt6, R.id.bt7,R.id.bt8,R.id.bt9})

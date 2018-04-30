@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 /**
  * Created by Administrator on 2018/4/17.
@@ -110,7 +109,7 @@ public abstract class AbsWindow {
                 //获取相对屏幕的坐标，即以屏幕左上角为原点
                 x = event.getRawX();
                 y = event.getRawY() - statusHeight;   //statusHeight是系统状态栏的高度
-                Log.i("currP", "currX" + x + "====currY" + y);
+                Log.i("AbsWindow", "currX" + x + "====currY" + y);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:    //捕获手指触摸按下动作
                         //获取相对View的坐标，即以此View左上角为原点
@@ -120,13 +119,19 @@ public abstract class AbsWindow {
 
                         mStartY = event.getRawY();
                         mLastTime = System.currentTimeMillis();
-                        Log.i("startP", "startX" + mTouchStartX + "====startY" + mTouchStartY);
+                        Log.i("AbsWindow", " ACTION_DOWN : startX" + mTouchStartX + "====startY" + mTouchStartY);
                         isMove = false;
                         break;
 
 
                     case MotionEvent.ACTION_MOVE:   //捕获手指触摸移动动作
-                        updateViewPosition();
+//                        updateViewPosition();
+                        params.x = (int) (x - mTouchStartX);
+                        params.y = (int) (y - mTouchStartY);
+
+                        Log.i("AbsWindow", " ACTION_MOVE : startX" + mTouchStartX + "====startY" + mTouchStartY);
+                        Log.i("AbsWindow", " ACTION_MOVE : x" + x + "====y" + y);
+                        wm.updateViewLayout(view, params);  //刷新显示
                         isMove = true;
                         break;
 
@@ -134,7 +139,7 @@ public abstract class AbsWindow {
                     case MotionEvent.ACTION_UP:    //捕获手指触摸离开动作
                         mLastX = event.getRawX();
                         mLastY = event.getRawY();
-
+                        Log.i("AbsWindow", " ACTION_UP : x" + x + "====y" + y);
 
                         // 抬起手指时让floatView紧贴屏幕左右边缘
                         params.x = params.x <= (sW / 2) ? 0 : sW;
@@ -142,16 +147,15 @@ public abstract class AbsWindow {
                         wm.updateViewLayout(view, params);
 
 
-
-
                         mCurrentTime = System.currentTimeMillis();
                         if(mCurrentTime - mLastTime < 800){
                             if(Math.abs(mStartX - mLastX)< 10.0 && Math.abs(mStartY - mLastY) < 10.0){
                                 //处理点击的事件
-                                Toast.makeText(app,"可以处理点击事件",Toast.LENGTH_SHORT).show();
+                                if (listener != null) {
+                                    listener.onClick();
+                                }
                             }
                         }
-
 
                         break;
                 }
@@ -159,14 +163,6 @@ public abstract class AbsWindow {
             }
 
         });
-
-
-    }
-    private void updateViewPosition() {
-        //更新浮动窗口位置参数
-        params.x = (int) (x - mTouchStartX);
-        params.y = (int) (y - mTouchStartY);
-        wm.updateViewLayout(view, params);  //刷新显示
 
 
     }
