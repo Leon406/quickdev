@@ -5,7 +5,7 @@ Properties properties = new Properties()
 properties.load(rootProject.file('local.properties').newDataInputStream())
 android {
     compileSdkVersion targetVer
-    buildToolsVersion buildToolsVer
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "me.leon.quickdev"
         minSdkVersion minVer

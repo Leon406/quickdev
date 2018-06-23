@@ -1,4 +1,4 @@
-include ':app', ':baselibs', ':widget_animation_effect',
+include ':app', ':baselibs', ':widget_animation_effect', ':demo',
        // ':testpay',
         ':zxinglib',':bankcardrecognize'
 include':recycler'
